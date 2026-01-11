@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -152,7 +154,7 @@
 body {
   background-color: var(--bg-default);
   color: var(--text-primary);
-  font-family: "Inter", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* Buttons */
@@ -195,7 +197,7 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: var(--primary);
+  /* border-color: var(--primary); */
   outline: none;
 }
 
@@ -216,7 +218,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .active{
-  border-bottom: #c10100 2px solid;
-  padding: 0px;
+  border-bottom: #c10100 3px solid;
+  padding: 0px 2px;
   border-radius: 0px;
 }
