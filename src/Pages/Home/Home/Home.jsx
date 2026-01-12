@@ -1,6 +1,6 @@
-
 import AboutUs from "../AboutUs/AboutUs";
 import Banner from "../Banner/Banner";
+import BestService from "../BestService/BestService";
 import Quote from "../Quote/Quote";
 const Home = () => {
     return (
@@ -8,6 +8,7 @@ const Home = () => {
             <Banner></Banner>
             <Quote></Quote>
             <AboutUs></AboutUs>
+            <BestService></BestService>
         </div>
     );
 };

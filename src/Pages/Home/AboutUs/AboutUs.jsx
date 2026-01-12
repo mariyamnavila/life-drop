@@ -32,8 +32,8 @@ const AboutUs = () => {
                 </div>
                 <Button className=' bg-primary hover:bg-primary-hover mb-7'>Read More</Button>
             </div>
-            <div>
-                <img className='rounded-md w-150 h-150 object-cover' src={about} alt="" />
+            <div className='relative'>
+                <img className='rounded-md w-150 h-150 object-cover relative z-10' src={about} alt="" />
             </div>
         </div>
     );
