@@ -119,6 +119,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -126,28 +127,30 @@
 
 
 /* LifeDrop Theme Variables */
-:root {
-  /* Main Red Colors */
-  --primary: #c10100;          /* Deep red - main brand color */
-  --primary-hover: #ad0000;    /* Slightly darker red for hover effects */
+@theme {
+  /* Main Brand Colors */
+  --color-primary: #c10100;
+  --color-primary-hover: #ad0000;
 
-  /* Soft background / card / hover color */
-  --soft-red-card: #f2cccc;    /* Light red for hover, cards, dropdowns, active links */
+  /* Soft background / card / hover */
+  --color-soft-red-card: #f2cccc;
 
   /* Text Colors */
-  --text-primary: #260000;     /* Dark text for contrast */
-  --text-muted: #555555;       /* Muted text for descriptions */
-  --text-destructive: #c10100; /* Same as primary, for errors/messages */
+  --color-text-primary: #260000;
+  --color-text-muted: #555555;
+  --color-text-destructive: #c10100;
 
   /* Background / surface */
-  --bg-default: #ffffff;       /* Default page background */
-  --bg-card: #fff0f0;          /* Optional card background - very light red tint */
-  --popover: #ffffff;          /* For tooltips, popovers, dropdowns */
-  --popover-foreground: #260000;
+  --color-bg-default: #ffffff;
+  --color-bg-card: #fff0f0;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #260000;
 
-  /* Borders & radius */
-  --border: #f2cccc;           /* Light red border for inputs/cards */
-  --radius: 0.5rem;            /* Default border radius */
+  /* Borders */
+  --color-border: #f2cccc;
+
+  /* Radius */
+  --radius-default: 0.5rem;
 }
 
 /* Optional global resets for Tailwind integration */
@@ -170,7 +173,9 @@ body {
 }
 
 /* Card / Dropdown / Popover */
-.card, .dropdown, .popover {
+.card,
+.dropdown,
+.popover {
   background-color: var(--soft-red-card);
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -189,14 +194,18 @@ body {
 } */
 
 /* Form / Input Fields */
-input, textarea, select {
+input,
+textarea,
+select {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 0.5rem 0.75rem;
   transition: border-color 0.2s ease;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   /* border-color: var(--primary); */
   outline: none;
 }
@@ -217,8 +226,38 @@ input:focus, textarea:focus, select:focus {
   background-color: var(--soft-red-card);
 }
 
-.active{
+.active {
   border-bottom: #c10100 3px solid;
   padding: 0px 2px;
   border-radius: 0px;
+}
+
+.smoke-particle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: rgba(193, 1, 0, 0.25);
+  /* soft red */
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(14px);
+  /* diffusion / ink in water look */
+  transform: translate(-50%, -50%);
+  z-index: 50;
+}
+
+.smoke-cursor {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(200, 0, 0, 0.5);
+  /* Adjust color for smoke */
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  /* Allows clicks to pass through */
+  z-index: 9999;
+  /* Add a subtle blur or glow to emulate smoke/ink */
+  filter: blur(10px);
 }

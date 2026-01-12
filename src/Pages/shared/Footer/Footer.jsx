@@ -3,7 +3,7 @@ import logo from '@/assets/logo-with-bg.PNG';
 
 const Footer = () => {
     return (
-        <footer className="bg-primary text-white mt-12">
+        <footer className="bg-primary text-white">
             {/* Top Section: Logo + Description */}
             <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col md:flex-row md:justify-center gap-6">
                 <div className="flex items-center gap-3 flex-col md:flex-row">
