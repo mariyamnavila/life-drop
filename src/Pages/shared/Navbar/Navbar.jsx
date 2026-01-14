@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import LifeDrop from '../../../assets/lifedrop-logo.png';
 import avatar from '../../../assets/avatar.png';
+import useAuth from "@/hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+    const { user, logOut } = useAuth(); // Replace with actual user authentication logic
     const [menuOpen, setMenuOpen] = useState(false);
-
-    const user = null; // Replace with actual user authentication logic
 
     const links = [
         { name: "Home", path: "/", },
@@ -17,6 +18,43 @@ const Navbar = () => {
     if (user) {
         links.push({ name: "Funding", path: "/funding", });
     }
+
+    console.log(user);
+
+    const handleLogOut = () => {
+        Swal.fire({
+            title: "Log out?",
+            text: "You will be signed out of your account.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, log out",
+            cancelButtonText: "Cancel",
+            confirmButtonColor: "#2563eb",
+            cancelButtonColor: "#6b7280"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logOut()
+                    .then(() => {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Logged out",
+                            text: "You have been logged out successfully.",
+                            confirmButtonColor: "#2563eb",
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Logout failed",
+                            text: error?.message || "Something went wrong. Please try again.",
+                            confirmButtonColor: "#dc2626"
+                        });
+                    });
+            }
+        });
+    };
 
     return (
         <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -78,19 +116,22 @@ const Navbar = () => {
                         ) : (
                             <div className="relative">
                                 <img
-                                    src={user.avatar || avatar}
+                                    src={user.photoURL || avatar}
                                     alt="User Avatar"
                                     className="w-10 h-10 rounded-full cursor-pointer"
                                     onClick={() => setMenuOpen(!menuOpen)}
                                 />
                                 {menuOpen && (
-                                    <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md p-2 flex flex-col gap-2">
-                                        <NavLink to="/profile" className="hover:text-primary">
-                                            Profile
+                                    <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md p-4 flex flex-col gap-2 ">
+                                        <NavLink to="/dashboard" className="hover:text-primary">
+                                            Dashboard
                                         </NavLink>
-                                        <NavLink to="/logout" className="hover:text-primary">
+                                        <p
+                                            className="hover:text-primary cursor-pointer"
+                                            onClick={handleLogOut}
+                                        >
                                             Logout
-                                        </NavLink>
+                                        </p>
                                     </div>
                                 )}
                             </div>

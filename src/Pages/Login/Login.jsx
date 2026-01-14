@@ -5,14 +5,42 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import useAuth from "@/hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
+    const { signIn } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = (data) => {
         console.log(data);
         // handle login API here
+        const { email, password } = data
+
+        signIn(email, password)
+            .then((result) => {
+                console.log(result);
+                Swal.fire({
+                    icon: "success",
+                    title: "Login Successful",
+                    text: "Welcome back! You have been logged in successfully.",
+                    confirmButtonText: "Continue",
+                    confirmButtonColor: "#2563eb", // matches primary blue tone
+                    timer: 2500,
+                    timerProgressBar: true
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Login Failed",
+                    text: error?.message || "Something went wrong. Please try again.",
+                    confirmButtonText: "Try Again",
+                    confirmButtonColor: "#dc2626" // professional red
+                });
+            })
     };
 
     return (

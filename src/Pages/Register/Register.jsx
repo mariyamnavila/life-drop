@@ -9,10 +9,13 @@ import districts from '../../../public/bangladesh_districts.json';
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import useAuth from "@/hooks/useAuth";
+import Swal from "sweetalert2";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
 const Register = () => {
+    const { createUser, updateUserProfile } = useAuth()
     const { register, handleSubmit, control, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -20,9 +23,41 @@ const Register = () => {
     const [image, setImage] = useState(null)
 
     const onSubmit = (data) => {
-        console.log(data,image);
+        console.log(data, image);
 
-        const {name,email,confirm_password} = data;
+        const { name, email, confirm_password } = data;
+
+        createUser(email, confirm_password)
+            .then(async (result) => {
+                console.log(result);
+                Swal.fire({
+                    icon: "success",
+                    title: "Registration Complete",
+                    text: "Your account has been created successfully.",
+                    confirmButtonText: "Login Now",
+                    confirmButtonColor: "#2563eb"
+                });
+                const profile = {
+                    displayName: name,
+                    photoURL: image,
+                }
+                updateUserProfile(profile)
+                    .then(() => {
+                        console.log('donee');
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Registration Failed",
+                    text: error?.message || "Unable to create account. Please try again.",
+                    confirmButtonText: "Close",
+                    confirmButtonColor: "#dc2626"
+                });
+            })
 
     };
 
@@ -55,7 +90,7 @@ const Register = () => {
                             type="file"
                             // accept="image/*"
                             onChange={handleImageUpload}
-                            // {...register("avatar", { required: "Avatar is required" })}
+                        // {...register("avatar", { required: "Avatar is required" })}
                         />
                         {errors.avatar && <p className="text-red-500 text-sm">{errors.avatar.message}</p>}
                     </div>
