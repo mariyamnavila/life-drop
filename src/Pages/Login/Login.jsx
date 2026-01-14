@@ -18,7 +18,7 @@ const Login = () => {
     return (
         <div className="max-w-7xl mx-auto my-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-5">
             {/* LEFT: FORM */}
-            <div>
+            <div className="md:p-8">
                 <h2 className="text-4xl font-semibold text-primary">Login</h2>
                 <p className="text-gray-500 mt-3 max-w-lg">
                     Welcome back! Please enter your credentials to access your account.

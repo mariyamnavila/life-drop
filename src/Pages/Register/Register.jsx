@@ -8,6 +8,7 @@ import { Eye, EyeOff } from "lucide-react";
 import districts from '../../../public/bangladesh_districts.json';
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -16,10 +17,25 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [selectedDistrict, setSelectedDistrict] = useState("");
+    const [image, setImage] = useState(null)
 
     const onSubmit = (data) => {
-        console.log(data);
+        console.log(data,image);
+
+        const {name,email,confirm_password} = data;
+
     };
+
+    const handleImageUpload = async (event) => {
+        const formData = new FormData();
+        const imageFile = event.target.files[0];
+        formData.append('image', imageFile);
+        // console.log(event.target.files[0]);
+        // You can implement the image upload logic here
+
+        const res = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imagebb_key}`, formData)
+        setImage(res.data.data.url);
+    }
 
     return (
         <div className="max-w-7xl mx-auto my-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-5">
@@ -37,8 +53,9 @@ const Register = () => {
                         <Input
                             id="avatar"
                             type="file"
-                            accept="image/*"
-                            {...register("avatar", { required: "Avatar is required" })}
+                            // accept="image/*"
+                            onChange={handleImageUpload}
+                            // {...register("avatar", { required: "Avatar is required" })}
                         />
                         {errors.avatar && <p className="text-red-500 text-sm">{errors.avatar.message}</p>}
                     </div>
@@ -66,7 +83,6 @@ const Register = () => {
                         </div>
                     </div>
 
-                    {/* Blood Group */}
                     {/* Blood Group */}
                     <div className="space-y-2">
                         <Label htmlFor="blood_group">Blood Group</Label>

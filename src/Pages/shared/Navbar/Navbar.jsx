@@ -43,7 +43,10 @@ const Navbar = () => {
                             </button>
                         </div>
 
-                        <img src={LifeDrop} alt="LifeDrop Logo" className="w-30" />
+                        <Link to={'/'}>
+                            <img src={LifeDrop} alt="LifeDrop Logo" className="w-30" />
+                        </Link>
+
                     </div>
 
                     {/* Middle: Links */}
