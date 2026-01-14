@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -265,6 +266,7 @@ const Register = () => {
                     </p>
                     <Button className="bg-primary w-full mt-4">Register</Button>
                 </form>
+                {/* <SocialLogin /> */}
             </div>
 
             {/* RIGHT: Lottie Animation (desktop only) */}

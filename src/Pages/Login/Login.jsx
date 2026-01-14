@@ -7,6 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const Login = () => {
     const { signIn } = useAuth()
@@ -93,6 +94,7 @@ const Login = () => {
 
                     <Button className="bg-primary w-full mt-2">Login</Button>
                 </form>
+                {/* <SocialLogin/> */}
             </div>
 
             {/* RIGHT: Lottie Animation (desktop only) */}
