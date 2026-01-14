@@ -16,7 +16,7 @@ const AboutUs = () => {
 
     return (
         <div className='max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center md:justify-between mt-20 gap-10 px-5'>
-            <div className='lg:w-1/2 px-5 space-y-2'>
+            <div className='lg:w-1/2 pr-3 space-y-2'>
                 <p className='text-primary font-semibold mb-2'>About Us</p>
                 <h1 className='text-4xl font-semibold'>Together We Can Make World More Health & Better</h1>
                 <p className='mt-4 text-gray-500'>Our mission is to ensure that everyone has access to quality healthcare, regardless of their location or economic status. Through partnerships with local organizations and healthcare providers, we strive to create sustainable solutions that address the root causes of health disparities. Join us in our journey to make a positive impact on the world, one life at a time.</p>

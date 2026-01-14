@@ -232,32 +232,7 @@ select:focus {
   border-radius: 0px;
 }
 
-.smoke-particle {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: rgba(193, 1, 0, 0.25);
-  /* soft red */
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(14px);
-  /* diffusion / ink in water look */
-  transform: translate(-50%, -50%);
-  z-index: 50;
-}
-
-.smoke-cursor {
-  width: 50px;
-  height: 50px;
-  background-color: rgba(200, 0, 0, 0.5);
-  /* Adjust color for smoke */
-  border-radius: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  /* Allows clicks to pass through */
-  z-index: 9999;
-  /* Add a subtle blur or glow to emulate smoke/ink */
-  filter: blur(10px);
-}
+.swiper {
+  overflow-y: visible !important;
+} 
+  

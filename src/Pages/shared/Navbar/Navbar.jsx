@@ -68,7 +68,7 @@ const Navbar = () => {
                         {!user ? (
                             <NavLink
                                 to="/login"
-                                className="px-4 py-2 bg-primary hover:bg-(--primary-hover) text-white rounded-md font-medium"
+                                className="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-md font-medium"
                             >
                                 Login
                             </NavLink>

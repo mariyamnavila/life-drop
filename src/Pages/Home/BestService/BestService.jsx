@@ -39,7 +39,7 @@ const BestService = () => {
                         </div>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-50 md:pt-30 pb-10 items-stretch">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-50 md:pt-30 pb-18 items-stretch">
                     {
                         bestServiceData.map((ser,i) => (
                             <ServiceCard
