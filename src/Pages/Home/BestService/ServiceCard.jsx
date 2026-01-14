@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ServiceCard = ({ title, description, icon }) => {
-    console.log(title);
+
     return (
         <div className="bg-white rounded-lg shadow-md p-6 flex flex-col h-full items-center justify-center hover:shadow-xl transition-shadow duration-300">
             <div className="mb-4">{icon}</div>
