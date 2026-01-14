@@ -19,7 +19,6 @@ const Navbar = () => {
         links.push({ name: "Funding", path: "/funding", });
     }
 
-    console.log(user);
 
     const handleLogOut = () => {
         Swal.fire({

@@ -12,6 +12,7 @@ import axios from "axios";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
+import useAxios from "@/hooks/useAxios";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -22,11 +23,12 @@ const Register = () => {
     const [showConfirm, setShowConfirm] = useState(false);
     const [selectedDistrict, setSelectedDistrict] = useState("");
     const [image, setImage] = useState(null)
+    const axiosInstance = useAxios()
 
     const onSubmit = (data) => {
         console.log(data, image);
 
-        const { name, email, confirm_password } = data;
+        const { name, email, confirm_password, blood_group, district, upazila } = data;
 
         createUser(email, confirm_password)
             .then(async (result) => {
@@ -38,16 +40,37 @@ const Register = () => {
                     confirmButtonText: "Login Now",
                     confirmButtonColor: "#2563eb"
                 });
+
+                const userInfo = {
+                    name,
+                    image,
+                    blood_group,
+                    district,
+                    upazila,
+                    email,
+                    role: 'donor',
+                    status: 'active',
+                    created_at: new Date().toISOString(),
+                    last_logIn: new Date().toISOString(),
+                }
+
+                const userRes = await axiosInstance.post('/users', userInfo)
+
                 const profile = {
                     displayName: name,
                     photoURL: image,
                 }
                 updateUserProfile(profile)
                     .then(() => {
-                        console.log('donee');
                     })
                     .catch((error) => {
-                        console.log(error);
+                        Swal.fire({
+                            icon: "error",
+                            title: "Profile updating Failed",
+                            text: error?.message || "Unable to update profile. Contact Admin.",
+                            confirmButtonText: "Close",
+                            confirmButtonColor: "#dc2626"
+                        });
                     })
             })
             .catch((error) => {
