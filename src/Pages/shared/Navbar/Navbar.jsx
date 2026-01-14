@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import LifeDrop from '../../../assets/lifedrop-logo.png';
 import avatar from '../../../assets/avatar.png';
 
@@ -66,12 +66,12 @@ const Navbar = () => {
                     {/* Right: Login / Avatar */}
                     <div className="flex items-center gap-4">
                         {!user ? (
-                            <NavLink
+                            <Link
                                 to="/login"
                                 className="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-md font-medium"
                             >
                                 Login
-                            </NavLink>
+                            </Link>
                         ) : (
                             <div className="relative">
                                 <img
