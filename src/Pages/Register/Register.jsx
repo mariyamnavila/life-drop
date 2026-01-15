@@ -37,7 +37,7 @@ const Register = () => {
                     icon: "success",
                     title: "Registration Complete",
                     text: "Your account has been created successfully.",
-                    confirmButtonText: "Login Now",
+                    confirmButtonText: "Done",
                     confirmButtonColor: "#2563eb"
                 });
 

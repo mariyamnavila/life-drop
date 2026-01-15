@@ -20,6 +20,7 @@ const DashboardSidebar = () => {
     const { state } = useSidebar(); // expanded | collapsed
     const { user } = useAuth()
 
+
     return (
         <Sidebar collapsible="icon">
             {/* Header */}
@@ -29,7 +30,7 @@ const DashboardSidebar = () => {
                         <img src={lifeDrop} alt="LifeDrop Logo" className="w-30" />
                     </Link>
                 )}
-                <SidebarTrigger>
+                <SidebarTrigger className={'pr-3'}>
                     <Menu className="h-5 w-5" />
                 </SidebarTrigger>
             </SidebarHeader>
@@ -42,7 +43,7 @@ const DashboardSidebar = () => {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild tooltip="Dashboard">
                             <NavLink to="/dashboard" >
-                                <Home className="ml-2" />
+                                <Home className={`${state === 'expanded'? 'ml-2':'ml-0'}`} />
                                 <span>Dashboard</span>
                             </NavLink>
                         </SidebarMenuButton>
@@ -75,7 +76,7 @@ const DashboardSidebar = () => {
             <SidebarFooter className="p-4">
                 <div className="flex items-center gap-3">
                     {/* Avatar */}
-                    <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-muted">
+                    <div className={`relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-muted ${state === 'expanded'? 'left-0':'-left-3'}`}>
                         {user ? (
                             <img
                                 src={user.photoURL || avatar}

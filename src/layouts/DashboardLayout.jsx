@@ -5,10 +5,10 @@ import DashboardSidebar from "./DashboardSidebar";
 const DashboardLayout = () => {
     return (
         <SidebarProvider>
-            <div className="flex min-h-screen bg-muted/40">
+            <div className="flex min-h-screen ">
                 <DashboardSidebar />
 
-                <main className="flex-1">
+                <main className="flex-1 p-4 md:p-4">
                     <Outlet />
                 </main>
             </div>
