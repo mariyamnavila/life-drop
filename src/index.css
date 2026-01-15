@@ -125,7 +125,6 @@
   }
 }
 
-
 /* LifeDrop Theme Variables */
 @theme {
   /* Main Brand Colors */
@@ -235,4 +234,4 @@ select:focus {
 .swiper {
   overflow-y: visible !important;
 } 
-  
+
