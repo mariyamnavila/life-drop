@@ -6,6 +6,7 @@ import Login from "@/Pages/Login/Login";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import PrivateRoute from "@/routes/PrivateRoute";
 import DashboardHome from "@/Pages/Dashboard/DashboardHome/DashboardHome";
+import CreateDonation from "@/Pages/Dashboard/CreateDonation/CreateDonation";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         index: true,
         Component: DashboardHome,
       },
+      {
+        path: 'create-donation-request',
+        Component: CreateDonation,
+      }
     ]
   }
 ]);

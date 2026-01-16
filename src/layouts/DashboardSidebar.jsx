@@ -16,23 +16,30 @@ import lifeDrop from '@/assets/lifedrop-logo.png';
 import useAuth from "@/hooks/useAuth";
 import avatar from '@/assets/avatar.png';
 
-const DashboardSidebar = () => {
-    const { state } = useSidebar(); // expanded | collapsed
-    const { user } = useAuth()
+const DashboardSidebar = ({ isMobile, onNavigate }) => {
+    const { state } = useSidebar();
+    const { user } = useAuth();
 
+    const handleNavClick = () => {
+        if (isMobile && onNavigate) {
+            onNavigate(); // Close the sheet on mobile
+        }
+    };
 
     return (
-        <Sidebar collapsible="icon">
+        <Sidebar collapsible="icon" className="h-full flex flex-col">
             {/* Header */}
             <SidebarHeader className="flex flex-row items-center justify-between px-4 py-3">
-                {state === "expanded" && (
+                {state === "expanded" || isMobile ? (
                     <Link to={'/'}>
                         <img src={lifeDrop} alt="LifeDrop Logo" className="w-30" />
                     </Link>
+                ) : null}
+                {!isMobile && (
+                    <SidebarTrigger className={'pr-3'}>
+                        <Menu className="h-5 w-5" />
+                    </SidebarTrigger>
                 )}
-                <SidebarTrigger className={'pr-3'}>
-                    <Menu className="h-5 w-5" />
-                </SidebarTrigger>
             </SidebarHeader>
 
             <Separator />
@@ -42,8 +49,8 @@ const DashboardSidebar = () => {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild tooltip="Dashboard">
-                            <NavLink to="/dashboard" >
-                                <Home className={`${state === 'expanded'? 'ml-2':'ml-0'}`} />
+                            <NavLink to="/dashboard" end onClick={handleNavClick}>
+                                <Home />
                                 <span>Dashboard</span>
                             </NavLink>
                         </SidebarMenuButton>
@@ -51,18 +58,18 @@ const DashboardSidebar = () => {
 
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild tooltip="My Requests">
-                            <NavLink to="/dashboard/my-donation-requests">
+                            <NavLink to="/dashboard/my-donation-requests" onClick={handleNavClick}>
                                 <Droplet />
-                                <span>My Requests</span>
+                                <span>My Donation Requests</span>
                             </NavLink>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
 
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild tooltip="Create Request">
-                            <NavLink to="/dashboard/create-donation-request">
+                            <NavLink to="/dashboard/create-donation-request" onClick={handleNavClick}>
                                 <PlusCircle />
-                                <span>Create Request</span>
+                                <span>Create Donation Request</span>
                             </NavLink>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -75,9 +82,8 @@ const DashboardSidebar = () => {
             {/* User Info Footer */}
             <SidebarFooter className="p-4">
                 <div className="flex items-center gap-3">
-                    {/* Avatar */}
-                    <div className={`relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-muted ${state === 'expanded'? 'left-0':'-left-3'}`}>
-                        {user ? (
+                    <div className={`relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-muted ${state === 'expanded' || isMobile ? 'left-0' : '-left-3'}`}>
+                        {user?.photoURL ? (
                             <img
                                 src={user.photoURL || avatar}
                                 alt={user.displayName}
@@ -85,19 +91,18 @@ const DashboardSidebar = () => {
                             />
                         ) : (
                             <div className="flex h-full w-full items-center justify-center text-sm font-medium text-muted-foreground">
-                                {user.displayName?.charAt(0)}
+                                {user?.displayName?.charAt(0) || 'U'}
                             </div>
                         )}
                     </div>
 
-                    {/* User Info */}
-                    {state === "expanded" && (
+                    {(state === "expanded" || isMobile) && (
                         <div className="flex min-w-0 flex-col">
                             <span className="truncate text-sm font-medium">
-                                {user.displayName}
+                                {user?.displayName || 'User'}
                             </span>
                             <span className="truncate text-xs text-muted-foreground">
-                                {user.email}
+                                {user?.email || ''}
                             </span>
                         </div>
                     )}

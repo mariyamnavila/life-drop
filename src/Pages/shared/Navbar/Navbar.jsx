@@ -6,8 +6,9 @@ import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-    const { user, logOut } = useAuth(); // Replace with actual user authentication logic
-    const [menuOpen, setMenuOpen] = useState(false);
+    const { user, logOut } = useAuth();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
     const links = [
         { name: "Home", path: "/", },
@@ -65,13 +66,13 @@ const Navbar = () => {
                         {/* Mobile menu button */}
                         <div className="md:hidden">
                             <button
-                                onClick={() => setMenuOpen(!menuOpen)}
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                                 className="text-primary focus:outline-none"
                             >
                                 {/* Hamburger icon */}
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2"
                                     viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                                    {menuOpen ? (
+                                    {mobileMenuOpen ? (
                                         <path d="M6 18L18 6M6 6l12 12" /> // X icon when open
                                     ) : (
                                         <path d="M4 6h16M4 12h16M4 18h16" /> // Hamburger icon when closed
@@ -118,11 +119,15 @@ const Navbar = () => {
                                     src={user.photoURL || avatar}
                                     alt="User Avatar"
                                     className="w-10 h-10 rounded-full cursor-pointer"
-                                    onClick={() => setMenuOpen(!menuOpen)}
+                                    onClick={() => setProfileMenuOpen(!profileMenuOpen)}
                                 />
-                                {menuOpen && (
+                                {profileMenuOpen && (
                                     <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md p-4 flex flex-col gap-2 ">
-                                        <NavLink to="/dashboard" className="hover:text-primary">
+                                        <NavLink
+                                            to="/dashboard"
+                                            className="hover:text-primary"
+                                            onClick={() => setProfileMenuOpen(false)}
+                                        >
                                             Dashboard
                                         </NavLink>
                                         <p
@@ -137,7 +142,7 @@ const Navbar = () => {
                         )}
                     </div>
                 </div>
-                {menuOpen && (
+                {mobileMenuOpen && (
                     <div className="md:hidden bg-white shadow-md p-4 flex flex-col gap-2 mt-2">
                         {links.map((link) => {
                             return (
@@ -150,7 +155,7 @@ const Navbar = () => {
                                             : "text-text-primary hover:bg-soft-red-card"
                                         }`
                                     }
-                                    onClick={() => setMenuOpen(false)}
+                                    onClick={() => setMobileMenuOpen(false)}
                                 >
                                     {link.name}
                                 </NavLink>
