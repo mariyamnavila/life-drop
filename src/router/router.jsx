@@ -8,6 +8,7 @@ import PrivateRoute from "@/routes/PrivateRoute";
 import DashboardHome from "@/Pages/Dashboard/DashboardHome/DashboardHome";
 import CreateDonation from "@/Pages/Dashboard/CreateDonation/CreateDonation";
 import DonationDetails from "@/Pages/DonationDetails/DonationDetails";
+import UpdateDonation from "@/Pages/UpdateDonation/UpdateDonation";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
       {
         path: 'create-donation-request',
         Component: CreateDonation,
-      }
+      },
+      {
+        path: 'edit-donation/:donationId',
+        Component: UpdateDonation,
+      },
     ]
   }
 ]);
