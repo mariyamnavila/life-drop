@@ -12,7 +12,7 @@ const DashboardLayout = () => {
 
     return (
         <SidebarProvider>
-            <div className="flex min-h-screen">
+            <div className="flex min-h-screen w-full"> {/* Add w-full here */}
                 {/* Desktop Sidebar */}
                 <div className="hidden md:block">
                     <DashboardSidebar />
@@ -38,7 +38,7 @@ const DashboardLayout = () => {
                 </Sheet>
 
                 {/* Main content */}
-                <main className="flex-1 p-4 md:p-4 mt-16 md:mt-0">
+                <main className="flex-1 w-full p-4 pt-3 md:p-4 mt-16 md:mt-0"> {/* Add w-full here */}
                     <Outlet />
                 </main>
             </div>
