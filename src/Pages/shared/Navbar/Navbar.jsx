@@ -12,8 +12,8 @@ const Navbar = () => {
 
     const links = [
         { name: "Home", path: "/", },
-        { name: "Donors", path: "/donors", },
-        { name: "Requests", path: "/requests", },
+        { name: "Requests", path: "/donation-requests", },
+        { name: "Search", path: "/search-requests", },
     ];
 
     if (user) {

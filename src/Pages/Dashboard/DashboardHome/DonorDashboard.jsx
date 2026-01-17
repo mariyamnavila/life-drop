@@ -30,7 +30,7 @@ const DonorDashboard = () => {
             const res = await axiosSecure.get(
                 `/donations?email=${user.email}&limit=3`
             );
-            return res.data;
+            return res.data.donations;
         },
     });
 
@@ -176,22 +176,10 @@ const DonorDashboard = () => {
                                                     <Button
                                                         variant="destructive"
                                                         size="sm"
-                                                        onClick={() =>handleUpdateStatus(donation._id, "canceled")}
+                                                        onClick={() => handleUpdateStatus(donation._id, "canceled")}
                                                         disabled={updateStatusMutation.isLoading}
                                                     >
                                                         Cancel
-                                                    </Button>
-                                                    <Link to={`/dashboard/edit-donation/${donation._id}`}>
-                                                        <Button variant="outline" size="sm">
-                                                            <Edit className="h-4 w-4" />
-                                                        </Button>
-                                                    </Link>
-                                                    <Button
-                                                        variant="destructive"
-                                                        size="sm"
-                                                        onClick={() => handleDelete(donation._id)}
-                                                    >
-                                                        <Trash className="h-4 w-4" />
                                                     </Button>
                                                 </>
                                             )}
@@ -200,6 +188,18 @@ const DonorDashboard = () => {
                                                     <Eye className="h-4 w-4" />
                                                 </Button>
                                             </Link>
+                                            <Link to={`/dashboard/edit-donation/${donation._id}`}>
+                                                <Button variant="outline" size="sm">
+                                                    <Edit className="h-4 w-4" />
+                                                </Button>
+                                            </Link>
+                                            <Button
+                                                variant="destructive"
+                                                size="sm"
+                                                onClick={() => handleDelete(donation._id)}
+                                            >
+                                                <Trash className="h-4 w-4" />
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 ))}

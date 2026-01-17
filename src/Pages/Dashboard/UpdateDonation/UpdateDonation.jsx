@@ -119,8 +119,13 @@ const UpdateDonation = () => {
             ...data,
             requesterName: user.displayName,
             requesterEmail: user.email,
-            donationStatus: "pending",
-            createdAt: new Date(),
+            donationStatus: donation.donationStatus,
+            createdAt: donation.createdAt,
+            updatedAt: new Date(),
+            ...(donation.donorName && {
+                donorName: donation.donorName,
+                donorEmail: donation.donorEmail,
+            }),
         };
 
         updateDonationMutation.mutate(donationRequest)
