@@ -17,7 +17,7 @@ const DonationRequests = () => {
 
 
     const { data, isLoading } = useQuery({
-        queryKey: ["pending-donations", page],
+        queryKey: ["pending-donations", page,limit],
         queryFn: async () => {
             const res = await axiosInstance.get(
                 `/donations?status=pending&page=${page}&limit=${limit}`
