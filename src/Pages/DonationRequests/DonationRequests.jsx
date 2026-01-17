@@ -27,8 +27,6 @@ const DonationRequests = () => {
         keepPreviousData: true,
     });
 
-    console.log(data);
-
     const totalPages = Math.ceil((data?.totalCount || 0) / limit);
     const pages = [...Array(totalPages).keys()];
 

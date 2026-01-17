@@ -1,38 +1,49 @@
-import React from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Loading from "@/Pages/Loading/Loading";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Trash, Eye, Edit } from "lucide-react";
-import Swal from "sweetalert2";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Edit, Eye, Trash } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const DonorDashboard = () => {
+
+const MyDonationRequests = () => {
     const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
-    // http://localhost:5000/donations?email=ayesha.rahman@example.com&limit=3
 
-    const { data: donations, isLoading } = useQuery({
-        queryKey: ["recent-donations", user?.email],
+    const [page, setPage] = useState(0);
+    const [limit, setLimit] = useState(10);
+    const [status, setStatus] = useState('all')
+
+    const { data, isLoading } = useQuery({
+        queryKey: ["recent-donations", user?.email, page, limit, status],
         enabled: !!user?.email && !loading,
         queryFn: async () => {
-            const res = await axiosSecure.get(
-                `/donations?email=${user.email}&limit=3`
-            );
-            return res.data.donations;
+            const query = new URLSearchParams({
+                email: user.email,
+                page,
+                limit,
+            });
+
+            if (status !== "all") {
+                query.append("status", status);
+            }
+
+            const res = await axiosSecure.get(`/donations?${query.toString()}`);
+            return res.data;
         },
+        keepPreviousData: true,
     });
+
+
+    const totalPages = Math.ceil((data?.totalCount || 0) / limit);
+    const pages = [...Array(totalPages).keys()];
 
     // Mutation to update donation status
     const updateStatusMutation = useMutation({
@@ -110,21 +121,30 @@ const DonorDashboard = () => {
     };
 
     return (
-        <div className="flex flex-col items-start justify-start p-4 md:p-6 space-y-6 w-full">
-            <h1 className="text-2xl font-bold mb-2">
-                Welcome, {user?.displayName || user?.name || "Donor"}!
-            </h1>
-            <p className="text-muted-foreground mb-4">
-                This is your donor dashboard. You can manage your donation requests from
-                here.
-            </p>
-
-            {donations && donations.length > 0 ? (
+        <div className="">
+            <div className="mt-3 mb-5 flex flex-col md:flex-row items-center justify-between mr-3">
+                <h1 className="text-2xl font-semibold">Your Donation Requests</h1>
+                <Select
+                    value={status}
+                    onValueChange={(val) => {
+                        setStatus(val);
+                        setPage(0);
+                    }}
+                >
+                    <SelectTrigger className="w-34">
+                        <SelectValue placeholder="Status" className="text-center text-black truncate" />
+                    </SelectTrigger>
+                    <SelectContent >
+                        <SelectItem value="all">All</SelectItem>
+                        <SelectItem value="pending">Pending</SelectItem>
+                        <SelectItem value="inprogress">In Progress</SelectItem>
+                        <SelectItem value="done">Done</SelectItem>
+                        <SelectItem value="canceled">Canceled</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+            {data.donations && data.donations.length > 0 ? (
                 <>
-                    <CardHeader className={'w-full px-0 mt-3'}>
-                        <CardTitle className={'text-xl'}>Your recent donation</CardTitle>
-                        <CardDescription>Here are your 3 most recent blood donations for quick reference.</CardDescription>
-                    </CardHeader>
                     <Card className="w-full overflow-x-auto py-0 rounded-lg">
                         <Table className="min-w-200 md:min-w-full">
                             <TableHeader>
@@ -141,7 +161,7 @@ const DonorDashboard = () => {
                             </TableHeader>
 
                             <TableBody>
-                                {donations.map((donation) => (
+                                {data.donations.map((donation) => (
                                     <TableRow key={donation._id}>
                                         <TableCell>{donation.recipientName}</TableCell>
                                         <TableCell>
@@ -206,21 +226,65 @@ const DonorDashboard = () => {
                             </TableBody>
                         </Table>
                     </Card>
+                    {/* Pagination */}
+                    <div className="flex items-center justify-center gap-2 mt-8 flex-wrap  sticky bottom-0 bg-white py-2">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            disabled={page === 0}
+                            onClick={() => setPage(page - 1)}
+                        >
+                            Prev
+                        </Button>
+
+                        {pages.map(p => (
+                            <Button
+                                key={p}
+                                size="sm"
+                                variant={page === p ? "default" : "outline"}
+                                onClick={() => setPage(p)}
+                            >
+                                {p + 1}
+                            </Button>
+                        ))}
+
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            disabled={page === totalPages - 1}
+                            onClick={() => setPage(page + 1)}
+                        >
+                            Next
+                        </Button>
+
+                        <Select
+                            value={String(limit)}
+                            onValueChange={(val) => {
+                                setLimit(Number(val));
+                                setPage(0);
+                            }}
+                        >
+                            <SelectTrigger className="w-24">
+                                <SelectValue placeholder="Rows" className="text-center text-black truncate" />
+                            </SelectTrigger>
+                            <SelectContent >
+                                <SelectItem value="5">5</SelectItem>
+                                <SelectItem value="10">10</SelectItem>
+                                <SelectItem value="15">15</SelectItem>
+                                <SelectItem value="20">20</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </>
             ) : (
-                <p className="text-sm text-muted-foreground">
-                    You have no recent donation requests.
-                </p>
+                <div className="min-h-screen flex justify-center items-center">
+                    <p className="text-lg text-muted-foreground">
+                        You don't have donation requests here.
+                    </p>
+                </div>
             )}
-
-            {/* View all button */}
-            <Link to="/dashboard/my-donation-requests">
-                <Button variant="outline" className="mt-2 hover:bg-primary hover:text-white">
-                    View My All Requests
-                </Button>
-            </Link>
         </div>
     );
 };
 
-export default DonorDashboard;
+export default MyDonationRequests;
