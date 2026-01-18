@@ -18,6 +18,7 @@ import AllUsers from "@/Pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "@/routes/AdminRoute";
 import AdminOrVolunteerRoute from "@/routes/AdminOrVolunteerRoute";
 import AllDonationRequests from "@/Pages/Dashboard/AllDonationRequests/AllDonationRequests";
+import FundingPage from "@/Pages/Funding/Funding";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: 'donations/:donationId',
         element: <PrivateRoute><DonationDetails /></PrivateRoute>,
+      },
+      {
+        path: 'funding',
+        element: <PrivateRoute><FundingPage /></PrivateRoute>,
       },
       {
         path: 'register',

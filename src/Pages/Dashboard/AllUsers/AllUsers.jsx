@@ -24,18 +24,27 @@ const AllUsers = () => {
 
     const [status, setStatus] = useState("all");
     const [page, setPage] = useState(0);
-    const limit = 10;
+    const [limit, setLimit] = useState(10);
 
     const { data, isLoading } = useQuery({
-        queryKey: ["users", status, page],
+        queryKey: ["users", status, page, limit],
         queryFn: async () => {
+            const query = new URLSearchParams({ page, limit, });
+
+            if (status !== "all") {
+                query.append("status", status);
+            }
+
             const res = await axiosSecure.get(
-                `/users?status=${status}&page=${page}&limit=${limit}`
+                `/users?${query.toString()}`
             );
             return res.data;
         },
         keepPreviousData: true,
     });
+
+    const totalPages = Math.ceil((data?.totalCount || 0) / limit);
+    const pages = [...Array(totalPages).keys()];
 
     const updateStatus = useMutation({
         mutationFn: ({ id, status }) =>
@@ -159,13 +168,53 @@ const AllUsers = () => {
             </Table>
 
             {/* Pagination */}
-            <div className="flex justify-center gap-2">
-                <Button disabled={page === 0} onClick={() => setPage(p => p - 1)}>
+            <div className="flex items-center justify-center gap-2 mt-8 flex-wrap  sticky bottom-0 bg-white py-2">
+                <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={page === 0}
+                    onClick={() => setPage(page - 1)}
+                >
                     Prev
                 </Button>
-                <Button disabled={(page + 1) >= data.totalPages} onClick={() => setPage(p => p + 1)}>
+
+                {pages.map(p => (
+                    <Button
+                        key={p}
+                        size="sm"
+                        variant={page === p ? "default" : "outline"}
+                        onClick={() => setPage(p)}
+                    >
+                        {p + 1}
+                    </Button>
+                ))}
+
+                <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={page === totalPages - 1}
+                    onClick={() => setPage(page + 1)}
+                >
                     Next
                 </Button>
+
+                <Select
+                    value={String(limit)}
+                    onValueChange={(val) => {
+                        setLimit(Number(val));
+                        setPage(0);
+                    }}
+                >
+                    <SelectTrigger className="w-24">
+                        <SelectValue placeholder="Rows" className="text-center text-black truncate" />
+                    </SelectTrigger>
+                    <SelectContent >
+                        <SelectItem value="5">5</SelectItem>
+                        <SelectItem value="10">10</SelectItem>
+                        <SelectItem value="15">15</SelectItem>
+                        <SelectItem value="20">20</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
         </div>
     );

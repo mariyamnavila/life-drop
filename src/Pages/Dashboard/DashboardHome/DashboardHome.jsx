@@ -1,7 +1,7 @@
 import useUserRole from "@/hooks/useUserRole";
 import Loading from "@/Pages/Loading/Loading";
 import DonorDashboard from "./DonorDashboard";
-import AdminDashboard from "./AdminDashboard";
+import AdminOrVolunteerDashboard from "./AdminOrVolunteerDashboard";
 import Unauthorized from "@/Pages/Unauthorized/Unauthorized";
 
 
@@ -14,10 +14,8 @@ const DashboardHome = () => {
 
     if (role === 'donor') {
         return <DonorDashboard />
-    // } else if (role === 'volunteer') {
-    //     return <VolunteerDashboard />
-    } else if (role === 'admin') {
-        return <AdminDashboard />
+    } else if (role === 'admin' || role === 'volunteer') {
+        return <AdminOrVolunteerDashboard />
     } else {
         return <Unauthorized />
     }

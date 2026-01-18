@@ -87,7 +87,7 @@ const UpdateDonation = () => {
             form.reset({
                 recipientName: donation.recipientName,
                 recipientDistrict: donation.recipientDistrict,
-                // recipientUpazila: donation.recipientUpazila,
+                recipientUpazila: donation.recipientUpazila,
                 hospitalName: donation.hospitalName,
                 fullAddress: donation.fullAddress,
                 bloodGroup: donation.bloodGroup,
@@ -174,7 +174,7 @@ const UpdateDonation = () => {
                                                 field.onChange(val);
                                                 form.setValue("recipientUpazila", ""); // reset upazila
                                             }}
-                                            value={field.value}
+                                            value={donation.recipientDistrict}
                                         >
                                             <SelectTrigger className={'w-full'}>
                                                 <SelectValue placeholder="Select District" />
@@ -262,7 +262,7 @@ const UpdateDonation = () => {
                             <FormItem>
                                 <FormLabel>Blood Group</FormLabel>
                                 <FormControl>
-                                    <Select onValueChange={field.onChange} value={field.value}>
+                                    <Select onValueChange={field.onChange} value={donation.bloodGroup}>
                                         <SelectTrigger className={'w-full'}>
                                             <SelectValue placeholder="Select Blood Group" />
                                         </SelectTrigger>
@@ -323,7 +323,7 @@ const UpdateDonation = () => {
                                     <FormControl>
                                         <Select
                                             onValueChange={field.onChange}
-                                            value={field.value || ""}
+                                            value={field.value || donation.donationTime || ""}
                                         >
                                             <SelectTrigger className={'w-full'}>
                                                 <SelectValue placeholder="Select Time" />

@@ -5,7 +5,7 @@ import { Users, DollarSign, Droplet } from "lucide-react";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
-const AdminDashboard = () => {
+const AdminOrVolunteerDashboard = () => {
     const axiosSecure = useAxiosSecure();
 
     // Fetch statistics
@@ -75,4 +75,4 @@ const AdminDashboard = () => {
     );
 };
 
-export default AdminDashboard;
+export default AdminOrVolunteerDashboard;
