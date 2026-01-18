@@ -8,11 +8,16 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { signIn } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from || '/'
 
     const onSubmit = (data) => {
         console.log(data);
@@ -31,6 +36,7 @@ const Login = () => {
                     timer: 2500,
                     timerProgressBar: true
                 });
+                navigate(from)
             })
             .catch((error) => {
                 console.log(error);

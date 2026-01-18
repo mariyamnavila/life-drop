@@ -13,6 +13,7 @@ import DonationRequests from "@/Pages/DonationRequests/DonationRequests";
 import SearchPage from "@/Pages/SearchPage/SearchPage";
 import MyDonationRequests from "@/Pages/Dashboard/MyDonationRequests/MyDonationRequests";
 import Profile from "@/Pages/Profile/Profile";
+import Unauthorized from "@/Pages/Unauthorized/Unauthorized";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: 'login',
         Component: Login
+      },
+      {
+        path: 'unauthorized',
+        Component: Unauthorized,
       },
     ]
   },

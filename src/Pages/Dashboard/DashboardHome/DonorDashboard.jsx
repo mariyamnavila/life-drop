@@ -157,8 +157,9 @@ const DonorDashboard = () => {
                                         <TableCell>{donation.donationStatus}</TableCell>
                                         <TableCell>
                                             {donation.donationStatus !== "pending" ? (
-                                                <div>
-                                                    {donation.donorName} ({donation.donorEmail})
+                                                <div className="flex flex-col">
+                                                    <span className="font-medium">{donation.donorName}</span>
+                                                    <span className="text-sm text-muted-foreground">{donation.donorEmail}</span>
                                                 </div>
                                             ) : 'pending'}
                                         </TableCell>

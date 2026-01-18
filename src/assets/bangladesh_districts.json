@@ -363,6 +363,11 @@
         "bn_name": "রাঙ্গুনিয়া"
       },
       {
+        "id": "a1",
+        "name": "Chittagong",
+        "bn_name": "Chittagong"
+      },
+      {
         "id": "66",
         "name": "Sitakunda",
         "bn_name": "সীতাকুন্ড"
@@ -2052,6 +2057,11 @@
   {
     "district_name": "Dhaka",
     "upazilas": [
+      {
+        "id": "a2",
+        "name": "Dhaka",
+        "bn_name": "Dhake"
+      },
       {
         "id": "365",
         "name": "Savar",

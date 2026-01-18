@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Eye, EyeOff } from "lucide-react";
 import districts from '@/assets/bangladesh_districts.json';
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
@@ -25,6 +25,10 @@ const Register = () => {
     const [image, setImage] = useState(null)
     const axiosInstance = useAxios()
 
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from || '/'
+
     const onSubmit = (data) => {
         console.log(data, image);
 
@@ -40,6 +44,8 @@ const Register = () => {
                     confirmButtonText: "Done",
                     confirmButtonColor: "#2563eb"
                 });
+
+                navigate(from)
 
                 const userInfo = {
                     name,

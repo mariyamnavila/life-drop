@@ -170,7 +170,7 @@ const Profile = () => {
                 </Alert>
             )}
 
-            <Card className="overflow-hidden shadow-lg">
+            <Card className="overflow-hidden shadow-lg pt-0">
                 {/* Header Banner */}
                 <div className="h-32 bg-linear-to-r from-red-500 via-pink-500 to-rose-500 relative">
                     <div className="absolute top-4 right-4 flex gap-2">

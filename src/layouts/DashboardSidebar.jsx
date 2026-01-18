@@ -9,16 +9,18 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { useSidebar } from '@/components/ui/use-sidebar';
-import { Home, PlusCircle, Droplet, Menu, User } from "lucide-react";
+import { Home, PlusCircle, Droplet, Menu, User, ClipboardList, Users } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Link, NavLink } from "react-router-dom";
 import lifeDrop from '@/assets/lifedrop-logo.png';
 import useAuth from "@/hooks/useAuth";
 import avatar from '@/assets/avatar.png';
+import useUserRole from "@/hooks/useUserRole";
 
 const DashboardSidebar = ({ isMobile, onNavigate }) => {
     const { state } = useSidebar();
     const { user } = useAuth();
+    const { role, isLoading } = useUserRole();
 
     const handleNavClick = () => {
         if (isMobile && onNavigate) {
@@ -55,6 +57,31 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
                             </NavLink>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
+
+                    {/* Admin links */}
+
+                    {
+                        !isLoading && role === 'admin' && <>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild tooltip="All Users">
+                                    <NavLink to="/dashboard/all-users" onClick={handleNavClick}>
+                                        <Users />
+                                        <span>All Users</span>
+                                    </NavLink>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild tooltip="All Donation Requests">
+                                    <NavLink to="/dashboard/all-donation-requests" onClick={handleNavClick}>
+                                        <ClipboardList />
+                                        <span>All Donation Requests</span>
+                                    </NavLink>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+
+                        </>
+                    }
 
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild tooltip="My Requests">
