@@ -15,6 +15,9 @@ import MyDonationRequests from "@/Pages/Dashboard/MyDonationRequests/MyDonationR
 import Profile from "@/Pages/Profile/Profile";
 import Unauthorized from "@/Pages/Unauthorized/Unauthorized";
 import AllUsers from "@/Pages/Dashboard/AllUsers/AllUsers";
+import AdminRoute from "@/routes/AdminRoute";
+import AdminOrVolunteerRoute from "@/routes/AdminOrVolunteerRoute";
+import AllDonationRequests from "@/Pages/Dashboard/AllDonationRequests/AllDonationRequests";
 
 const router = createBrowserRouter([
   {
@@ -65,7 +68,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'all-users',
-        Component: AllUsers,
+        element: <AdminRoute><AllUsers /></AdminRoute>,
+      },
+      {
+        path: 'all-donation-requests',
+        element: <AdminOrVolunteerRoute><AllDonationRequests /></AdminOrVolunteerRoute>
       },
       {
         path: 'my-donation-requests',
