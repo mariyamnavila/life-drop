@@ -9,7 +9,7 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { useSidebar } from '@/components/ui/use-sidebar';
-import { Home, PlusCircle, Droplet, Menu } from "lucide-react";
+import { Home, PlusCircle, Droplet, Menu, User } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Link, NavLink } from "react-router-dom";
 import lifeDrop from '@/assets/lifedrop-logo.png';
@@ -75,39 +75,51 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
                     </SidebarMenuItem>
                 </SidebarMenu>
 
+                <SidebarMenuItem>
+                    <SidebarMenuButton asChild tooltip="Profile">
+                        <NavLink to="/dashboard/profile" onClick={handleNavClick}>
+                            <User />
+                            <span>Profile</span>
+                        </NavLink>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+
+
             </SidebarContent>
 
             <Separator />
 
             {/* User Info Footer */}
-            <SidebarFooter className="p-4">
-                <div className="flex items-center gap-3">
-                    <div className={`relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-muted ${state === 'expanded' || isMobile ? 'left-0' : '-left-3'}`}>
-                        {user?.photoURL ? (
-                            <img
-                                src={user.photoURL || avatar}
-                                alt={user.displayName}
-                                className="h-full w-full object-cover"
-                            />
-                        ) : (
-                            <div className="flex h-full w-full items-center justify-center text-sm font-medium text-muted-foreground">
-                                {user?.displayName?.charAt(0) || 'U'}
+            <Link to={'/dashboard/profile'}>
+                <SidebarFooter className="p-4">
+                    <div className="flex items-center gap-3">
+                        <div className={`relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-muted ${state === 'expanded' || isMobile ? 'left-0' : '-left-3'}`}>
+                            {user?.photoURL ? (
+                                <img
+                                    src={user.photoURL || avatar}
+                                    alt={user.displayName}
+                                    className="h-full w-full object-cover"
+                                />
+                            ) : (
+                                <div className="flex h-full w-full items-center justify-center text-sm font-medium text-muted-foreground">
+                                    {user?.displayName?.charAt(0) || 'U'}
+                                </div>
+                            )}
+                        </div>
+
+                        {(state === "expanded" || isMobile) && (
+                            <div className="flex min-w-0 flex-col">
+                                <span className="truncate text-sm font-medium">
+                                    {user?.displayName || 'User'}
+                                </span>
+                                <span className="truncate text-xs text-muted-foreground">
+                                    {user?.email || ''}
+                                </span>
                             </div>
                         )}
                     </div>
-
-                    {(state === "expanded" || isMobile) && (
-                        <div className="flex min-w-0 flex-col">
-                            <span className="truncate text-sm font-medium">
-                                {user?.displayName || 'User'}
-                            </span>
-                            <span className="truncate text-xs text-muted-foreground">
-                                {user?.email || ''}
-                            </span>
-                        </div>
-                    )}
-                </div>
-            </SidebarFooter>
+                </SidebarFooter>
+            </Link>
 
         </Sidebar>
     );

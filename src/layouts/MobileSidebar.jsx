@@ -1,4 +1,4 @@
-import { Home, PlusCircle, Droplet } from "lucide-react";
+import { Home, PlusCircle, Droplet, User } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import lifeDrop from '@/assets/lifedrop-logo.png';
 import useAuth from "@/hooks/useAuth";
@@ -67,6 +67,19 @@ const MobileSidebar = ({ onClose }) => {
                     >
                         <PlusCircle className="h-5 w-5" />
                         <span>Create Donation Request</span>
+                    </NavLink>
+                    <NavLink
+                        to="/dashboard/profile"
+                        onClick={handleNavClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive
+                                ? 'bg-accent text-accent-foreground'
+                                : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                            }`
+                        }
+                    >
+                        <User className="h-5 w-5" />
+                        <span>Profile</span>
                     </NavLink>
                 </div>
             </nav>
