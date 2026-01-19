@@ -47,7 +47,7 @@ const SearchPage = () => {
         staleTime: 30000, // 30 seconds
     });
 
-    console.log(results);
+    // console.log(results);
 
     const handleSearch = () => {
         setSearchParams({ bloodGroup, district, upazila });
@@ -201,7 +201,7 @@ const SearchPage = () => {
 
             {/* Initial State - Before Search */}
             {!isLoading && !searchParams && (
-                <Card>
+                <Card className={'mb-10'}>
                     <CardContent className="p-12 text-center">
                         {/* <Droplet className="h-12 w-12 mx-auto text-blue-400 mb-4" /> */}
                         <h3 className="text-lg font-semibold text-gray-900 mb-2">Ready to Search</h3>

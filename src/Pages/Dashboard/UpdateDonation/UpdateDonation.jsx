@@ -323,7 +323,7 @@ const UpdateDonation = () => {
                                     <FormControl>
                                         <Select
                                             onValueChange={field.onChange}
-                                            value={field.value || donation.donationTime || ""}
+                                            value={field.value}
                                         >
                                             <SelectTrigger className={'w-full'}>
                                                 <SelectValue placeholder="Select Time" />

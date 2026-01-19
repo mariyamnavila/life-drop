@@ -64,7 +64,7 @@ const FundingPage = () => {
     };
 
     return (
-        <div className="p-6">
+        <div className="p-6 max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center mb-4">
                 <div>
                     <h1 className="text-2xl font-semibold">Support LifeDrop</h1>

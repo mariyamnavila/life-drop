@@ -36,6 +36,7 @@ import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { useNavigate } from "react-router-dom";
 
 const CreateDonation = () => {
     const { user } = useAuth();
@@ -45,7 +46,8 @@ const CreateDonation = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogTitle, setDialogTitle] = useState("");
     const [dialogMessage, setDialogMessage] = useState("");
-
+    const [submitting, setSubmitting] = useState(false);
+    const navigate = useNavigate()
 
     const generateTimeOptions = () => {
         const times = [];
@@ -86,6 +88,9 @@ const CreateDonation = () => {
     });
 
     const onSubmit = async (data) => {
+        if (submitting) return; // 🚫 block duplicate submits
+
+        setSubmitting(true);
         const donationRequest = {
             ...data,
             requesterName: user.displayName,
@@ -101,7 +106,8 @@ const CreateDonation = () => {
                 setDialogTitle("Success!");
                 setDialogMessage("Donation request created successfully.");
                 setDialogOpen(true);
-                // form.reset(); // reset form
+                form.reset(); // reset form
+                navigate('/dashboard/my-donation-requests')
             } else {
                 throw new Error("Something went wrong");
             }
@@ -109,6 +115,8 @@ const CreateDonation = () => {
             setDialogTitle("Error");
             setDialogMessage(err.response?.data?.message || err.message || "An unexpected error occurred.");
             setDialogOpen(true);
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -146,7 +154,14 @@ const CreateDonation = () => {
 
             <CardContent className="pt-6">
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                e.preventDefault();
+                            }
+                        }}
+                        className="space-y-6">
 
                         {/* Read-only requester info */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -393,8 +408,8 @@ const CreateDonation = () => {
 
 
 
-                        <Button type="submit" className="w-full">
-                            Request Donation
+                        <Button type="submit" className="w-full" disabled={submitting}>
+                            {submitting ? "Submitting..." : "Request Donation"}
                         </Button>
 
                         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>

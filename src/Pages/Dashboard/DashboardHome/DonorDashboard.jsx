@@ -23,7 +23,7 @@ const DonorDashboard = () => {
     const queryClient = useQueryClient();
     // http://localhost:5000/donations?email=ayesha.rahman@example.com&limit=3
 
-    const { data: donations, isLoading } = useQuery({
+    const { data: donations, isLoading, refetch } = useQuery({
         queryKey: ["recent-donations", user?.email],
         enabled: !!user?.email && !loading,
         queryFn: async () => {
@@ -99,6 +99,7 @@ const DonorDashboard = () => {
                     "Your donation request has been deleted.",
                     "success"
                 );
+                refetch()
             } catch (err) {
                 Swal.fire(
                     "Error",

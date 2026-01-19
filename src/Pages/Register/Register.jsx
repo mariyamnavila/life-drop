@@ -27,16 +27,16 @@ const Register = () => {
 
     const location = useLocation()
     const navigate = useNavigate()
-    const from = location.state?.from || '/'
+    const from = location.state?.from?.pathname || '/'
 
     const onSubmit = (data) => {
-        console.log(data, image);
+        // console.log(data, image);
 
         const { name, email, confirm_password, blood_group, district, upazila } = data;
 
         createUser(email, confirm_password)
             .then(async (result) => {
-                console.log(result);
+                // console.log(result);
                 Swal.fire({
                     icon: "success",
                     title: "Registration Complete",
@@ -45,7 +45,7 @@ const Register = () => {
                     confirmButtonColor: "#2563eb"
                 });
 
-                navigate(from)
+                navigate(from, { replace: true })
 
                 const userInfo = {
                     name,
@@ -289,7 +289,11 @@ const Register = () => {
                     {/* Already registered text */}
                     <p className="text-sm text-gray-500 text-center mt-2">
                         Already have an account?{" "}
-                        <Link to="/login" className="text-primary font-medium hover:underline">
+                        <Link
+                            to="/login"
+                            state={location.state}
+                            className="text-primary font-medium hover:underline"
+                        >
                             Login here
                         </Link>
                     </p>

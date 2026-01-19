@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
@@ -41,6 +41,7 @@ const DonationDetails = () => {
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    // const navigate = useNavigate()
 
     const form = useForm({
         defaultValues: {

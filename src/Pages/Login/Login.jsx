@@ -8,7 +8,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { signIn } = useAuth()
@@ -17,16 +17,16 @@ const Login = () => {
 
     const location = useLocation()
     const navigate = useNavigate()
-    const from = location.state?.from || '/'
+    const from = location.state?.from?.pathname || '/'
 
     const onSubmit = (data) => {
-        console.log(data);
+        // console.log(data);
         // handle login API here
         const { email, password } = data
 
         signIn(email, password)
             .then((result) => {
-                console.log(result);
+                // console.log(result);
                 Swal.fire({
                     icon: "success",
                     title: "Login Successful",
@@ -36,7 +36,7 @@ const Login = () => {
                     timer: 2500,
                     timerProgressBar: true
                 });
-                navigate(from)
+                navigate(from, { replace: true })
             })
             .catch((error) => {
                 console.log(error);
@@ -93,9 +93,13 @@ const Login = () => {
                     {/* Already have an account / register link */}
                     <p className="text-sm text-gray-500 text-center mt-2">
                         Don't have an account?{" "}
-                        <a href="/register" className="text-primary font-medium hover:underline">
+                        <Link
+                            to="/register"
+                            state={location.state}
+                            className="text-primary font-medium hover:underline"
+                        >
                             Register here
-                        </a>
+                        </Link>
                     </p>
 
                     <Button className="bg-primary w-full mt-2">Login</Button>

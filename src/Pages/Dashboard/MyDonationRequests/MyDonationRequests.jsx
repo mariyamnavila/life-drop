@@ -21,7 +21,7 @@ const MyDonationRequests = () => {
     const [limit, setLimit] = useState(10);
     const [status, setStatus] = useState('all')
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading,refetch } = useQuery({
         queryKey: ["recent-donations", user?.email, page, limit, status],
         enabled: !!user?.email && !loading,
         queryFn: async () => {
@@ -110,6 +110,7 @@ const MyDonationRequests = () => {
                     "Your donation request has been deleted.",
                     "success"
                 );
+                refetch()
             } catch (err) {
                 Swal.fire(
                     "Error",
