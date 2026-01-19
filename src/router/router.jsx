@@ -20,6 +20,7 @@ import AdminOrVolunteerRoute from "@/routes/AdminOrVolunteerRoute";
 import AllDonationRequests from "@/Pages/Dashboard/AllDonationRequests/AllDonationRequests";
 import FundingPage from "@/Pages/Funding/Funding";
 import AddBlog from "@/Pages/Dashboard/ContentManagement/AddBlog";
+import ContentManagement from "@/Pages/Dashboard/ContentManagement/ContentManagement";
 
 const router = createBrowserRouter([
   {
@@ -75,10 +76,10 @@ const router = createBrowserRouter([
       {
         path: 'content-management',
         children: [
-          // {
-          //   index:true,
-          //   Component:ContentManagement
-          // },
+          {
+            index: true,
+            Component: ContentManagement,
+          },
           {
             path: 'add-blog',
             element: <AdminOrVolunteerRoute><AddBlog /></AdminOrVolunteerRoute>

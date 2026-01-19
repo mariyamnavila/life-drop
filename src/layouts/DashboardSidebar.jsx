@@ -9,7 +9,7 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { useSidebar } from '@/components/ui/use-sidebar';
-import { Home, PlusCircle, Droplet, Menu, User, ClipboardList, Users } from "lucide-react";
+import { Home, PlusCircle, Droplet, Menu, User, ClipboardList, Users, Folder } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Link, NavLink } from "react-router-dom";
 import lifeDrop from '@/assets/lifedrop-logo.png';
@@ -86,7 +86,16 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
 
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild tooltip="Content Management">
+                                    <NavLink to="/dashboard/content-management" onClick={handleNavClick}>
+                                        <Folder /> {/* lucide-react icon */}
+                                        <span>Content Management</span>
+                                    </NavLink>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
                         </>
+
                     }
 
                     <SidebarMenuItem>
