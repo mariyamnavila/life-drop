@@ -22,6 +22,7 @@ import FundingPage from "@/Pages/Funding/Funding";
 import AddBlog from "@/Pages/Dashboard/ContentManagement/AddBlog";
 import ContentManagement from "@/Pages/Dashboard/ContentManagement/ContentManagement";
 import Blogs from "@/Pages/Blog/Blog";
+import BlogDetails from "@/Pages/Blog/BlogDetails/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: 'blogs',
         Component: Blogs
+      },
+      {
+        path: 'blogs/:id',
+        Component: BlogDetails,
       },
       {
         path: 'donations/:donationId',
