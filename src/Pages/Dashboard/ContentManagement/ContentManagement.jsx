@@ -98,7 +98,7 @@ const ContentManagement = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="px-4">
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Content Management</h1>
@@ -145,9 +145,9 @@ const ContentManagement = () => {
                                 <TableCell>{blog.status}</TableCell>
                                 <TableCell>{new Date(blog.created_at).toLocaleDateString()}</TableCell>
                                 <TableCell className="flex gap-2">
-                                    <Button size="sm" onClick={() => navigate(`/dashboard/content-management/edit-blog/${blog._id}`)}>
+                                    {/* <Button size="sm" onClick={() => navigate(`/dashboard/content-management/edit-blog/${blog._id}`)}>
                                         Edit
-                                    </Button>
+                                    </Button> */}
 
                                     {/* Publish/Unpublish for admin only */}
                                     {role === "admin" && (

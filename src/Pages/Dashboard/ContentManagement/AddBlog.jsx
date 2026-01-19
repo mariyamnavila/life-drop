@@ -112,7 +112,7 @@ const AddBlog = () => {
     };
 
     return (
-        <Card className="max-w-4xl mx-auto">
+        <Card className="">
             <CardHeader>
                 <CardTitle>Add New Blog</CardTitle>
             </CardHeader>
