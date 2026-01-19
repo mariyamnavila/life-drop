@@ -20,7 +20,7 @@ const DonationRequests = () => {
         queryKey: ["pending-donations", page,limit],
         queryFn: async () => {
             const res = await axiosInstance.get(
-                `/donations?status=pending&page=${page}&limit=${limit}`
+                `/donations/pending?page=${page}&limit=${limit}`
             );
             return res.data;
         },

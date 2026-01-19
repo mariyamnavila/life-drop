@@ -4,9 +4,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Users, DollarSign, Droplet } from "lucide-react";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useUserRole from "@/hooks/useUserRole";
 
 const AdminOrVolunteerDashboard = () => {
     const axiosSecure = useAxiosSecure();
+    const { role, isLoading: roleLoading } = useUserRole()
 
     // Fetch statistics
     const { data, isLoading } = useQuery({
@@ -17,7 +19,7 @@ const AdminOrVolunteerDashboard = () => {
         },
     });
 
-    if (isLoading) {
+    if (isLoading || roleLoading) {
         return (
             <div className="p-6">
                 <Skeleton className="h-8 w-64 mb-6" />
@@ -35,7 +37,7 @@ const AdminOrVolunteerDashboard = () => {
             {/* Welcome Section */}
             <div className="mb-8">
                 <h1 className="text-2xl font-bold mb-2">
-                    Welcome, Admin!
+                    Welcome, {role === 'admin' ? 'Admin!' : 'Volunteer'}
                 </h1>
                 <p className="text-muted-foreground">
                     This is your admin dashboard. Here you can see the platform statistics and manage users, donations, and funding.

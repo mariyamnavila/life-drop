@@ -71,6 +71,12 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
 
+                        </>
+                    }
+
+                    {/* admin and volunteer links */}
+                    {
+                        !isLoading && (role === 'admin' || role === 'volunteer') && <>
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild tooltip="All Donation Requests">
                                     <NavLink to="/dashboard/all-donation-requests" onClick={handleNavClick}>

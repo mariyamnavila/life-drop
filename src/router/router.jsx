@@ -19,6 +19,7 @@ import AdminRoute from "@/routes/AdminRoute";
 import AdminOrVolunteerRoute from "@/routes/AdminOrVolunteerRoute";
 import AllDonationRequests from "@/Pages/Dashboard/AllDonationRequests/AllDonationRequests";
 import FundingPage from "@/Pages/Funding/Funding";
+import AddBlog from "@/Pages/Dashboard/ContentManagement/AddBlog";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,19 @@ const router = createBrowserRouter([
       {
         path: 'create-donation-request',
         Component: CreateDonation,
+      },
+      {
+        path: 'content-management',
+        children: [
+          // {
+          //   index:true,
+          //   Component:ContentManagement
+          // },
+          {
+            path: 'add-blog',
+            element: <AdminOrVolunteerRoute><AddBlog /></AdminOrVolunteerRoute>
+          },
+        ]
       },
       {
         path: 'all-users',
