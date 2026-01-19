@@ -21,6 +21,7 @@ import AllDonationRequests from "@/Pages/Dashboard/AllDonationRequests/AllDonati
 import FundingPage from "@/Pages/Funding/Funding";
 import AddBlog from "@/Pages/Dashboard/ContentManagement/AddBlog";
 import ContentManagement from "@/Pages/Dashboard/ContentManagement/ContentManagement";
+import Blogs from "@/Pages/Blog/Blog";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: 'search-requests',
         Component: SearchPage,
+      },
+      {
+        path: 'blogs',
+        Component: Blogs
       },
       {
         path: 'donations/:donationId',
@@ -78,7 +83,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            Component: ContentManagement,
+            element: <AdminOrVolunteerRoute><ContentManagement /></AdminOrVolunteerRoute>
           },
           {
             path: 'add-blog',

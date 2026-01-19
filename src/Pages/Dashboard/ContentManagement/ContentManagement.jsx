@@ -44,7 +44,7 @@ const ContentManagement = () => {
 
     // Mutations
     const publishMutation = useMutation({
-        mutationFn: async (blogId, newStatus) =>
+        mutationFn: async ({ blogId, newStatus }) =>
             await axiosSecure.patch(`/blogs/${blogId}/status`, { status: newStatus }),
         onSuccess: () => {
             Swal.fire({ icon: "success", title: "Updated!", timer: 1500, showConfirmButton: false });
@@ -69,6 +69,7 @@ const ContentManagement = () => {
     // Handlers
     const handlePublishToggle = (blog) => {
         const action = blog.status === "draft" ? "publish" : "unpublish";
+        const newStatus = blog.status === "draft" ? "published" : "draft"
         Swal.fire({
             title: `Are you sure you want to ${action} this blog?`,
             icon: "warning",
@@ -76,7 +77,7 @@ const ContentManagement = () => {
             confirmButtonText: "Yes",
         }).then((result) => {
             if (result.isConfirmed) {
-                publishMutation.mutate(blog._id, blog.status === "draft" ? "published" : "draft");
+                publishMutation.mutate({ blogId: blog._id, newStatus });
             }
         });
     };

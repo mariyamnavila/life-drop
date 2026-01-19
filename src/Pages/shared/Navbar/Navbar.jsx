@@ -14,6 +14,7 @@ const Navbar = () => {
         { name: "Home", path: "/", },
         { name: "Requests", path: "/donation-requests", },
         { name: "Search", path: "/search-requests", },
+        { name: "Blog", path: "/blogs", },
     ];
 
     if (user) {
