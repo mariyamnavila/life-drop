@@ -32,7 +32,7 @@ const DonationRequests = () => {
 
     if (isLoading) {
         return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
                 {[...Array(6)].map((_, i) => (
                     <Skeleton key={i} className="h-44 rounded-xl" />
                 ))}
@@ -107,7 +107,7 @@ const DonationRequests = () => {
                 </div>
 
                 {/* Pagination */}
-                <div className="flex items-center justify-center gap-2 mt-8 flex-wrap">
+                <div className="flex items-center justify-center gap-2 mt-8 flex-wrap mb-8">
                     <Button
                         variant="outline"
                         size="sm"

@@ -9,6 +9,7 @@ import { CalendarDays, Clock, MapPin, Droplet, User, Hospital, AlertCircle } fro
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import districtsData from "@/assets/bangladesh_districts.json";
 import useAxios from "@/hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const SearchPage = () => {
     const axiosInstance = useAxios();
@@ -85,7 +86,7 @@ const SearchPage = () => {
     };
 
     return (
-        <div className="w-full space-y-6 max-w-7xl mx-auto px-3">
+        <div className="w-full space-y-6 max-w-7xl mx-auto px-3 mb-10">
             {/* Header */}
             <div className="mt-6">
                 <h1 className="text-3xl font-bold text-gray-900">Search Blood Donors</h1>
@@ -296,9 +297,11 @@ const SearchPage = () => {
                                         </div>
                                     )}
 
-                                    <Button className="w-full mt-4" variant="default">
-                                        View Details
-                                    </Button>
+                                    <Link to={`/donations/${request._id}`}>
+                                        <Button className="w-full mt-4" variant="default">
+                                            View Details
+                                        </Button>
+                                    </Link>
                                 </CardContent>
                             </Card>
                         ))}
