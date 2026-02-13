@@ -23,6 +23,7 @@ import AddBlog from "@/Pages/Dashboard/ContentManagement/AddBlog";
 import ContentManagement from "@/Pages/Dashboard/ContentManagement/ContentManagement";
 import Blogs from "@/Pages/Blog/Blog";
 import BlogDetails from "@/Pages/Blog/BlogDetails/BlogDetails";
+import SearchDonor from "@/Pages/SearchPage/SearchDonor";
 
 const router = createBrowserRouter([
   {
@@ -37,9 +38,13 @@ const router = createBrowserRouter([
         path: 'donation-requests',
         Component: DonationRequests,
       },
+      // {
+      //   path: 'search-requests',
+      //   Component: SearchPage,
+      // },
       {
-        path: 'search-requests',
-        Component: SearchPage,
+        path: 'search-donors',
+        Component: SearchDonor,
       },
       {
         path: 'blogs',
