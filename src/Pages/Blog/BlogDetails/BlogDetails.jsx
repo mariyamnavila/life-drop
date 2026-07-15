@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Loading from "@/Pages/Loading/Loading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,16 +21,17 @@ import {
     Share2,
     CheckCircle2
 } from "lucide-react";
+import useAxios from "@/hooks/useAxios";
 
 const BlogDetails = () => {
     const { id } = useParams();
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios();
     const [copied, setCopied] = React.useState(false);
 
     const { data, isLoading } = useQuery({
         queryKey: ["blog-details", id],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/blogs/${id}`);
+            const res = await axiosInstance.get(`/blogs/${id}`);
             return res.data.blog;
         },
     });

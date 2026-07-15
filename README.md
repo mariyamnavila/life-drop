@@ -1,60 +1,88 @@
 # Life Drop – Blood Donation Web App
-## Project Overview
 
-**Life Drop** is a blood donation web application that connects blood donors with people in urgent need of blood.
+## Overview
 
-The platform helps users quickly find donation requests and allows donors to contact requesters directly.
+**Life Drop** is a web application that connects blood donors with people in urgent need of blood. Users can quickly find donation requests, create their own requests, and contact donors directly. The platform also supports funding contributions to help donation-related causes.
 
-It also supports funding contributions to help donation-related causes.
+## Screenshot
 
-##  Major Features
+![Life Drop Screenshot](/public/Life-drop.png)
 
-* Advanced Search & Donation Requests
+## Tech Stack
 
-    * Donors can search for blood requests.
+- **Framework:** React 19, Vite 7
+- **Routing:** React Router 7
+- **Styling:** Tailwind CSS 4, Shadcn UI
+- **State Management:** TanStack Query
+- **Forms:** React Hook Form, Zod
+- **Authentication:** Firebase Auth
+- **Payments:** Stripe
+- **HTTP Client:** Axios
+- **Rich Text Editor:** Jodit React
 
-    * Authenticated users can create, update, and manage their own donation requests.
+## Key Features
 
-* Role-Based Dashboards
+- **Advanced Search & Donation Requests** – Search for blood requests by blood group, district, and upazila. Authenticated users can create, update, and delete their own requests.
+- **Role-Based Dashboards** – Separate dashboards for Admin, Volunteer, and regular Users with different permissions.
+- **Content Management** – Admin and Volunteers can create blog posts. Admin can publish them.
+- **Funding System** – Authenticated users can donate funds via Stripe integration.
+- **Responsive Design** – Fully responsive UI built with Tailwind CSS and Shadcn UI components.
 
-    * Admin dashboard to manage users, donation requests, and publish blogs.
+## Dependencies
 
-    * Volunteer dashboard to manage and update donation request status (no edit/delete access).
+| Package | Purpose |
+|---------|---------|
+| react / react-dom | UI framework |
+| react-router-dom | Client-side routing |
+| @tanstack/react-query | Server state management |
+| axios | HTTP requests |
+| react-hook-form | Form handling |
+| zod | Schema validation |
+| firebase | Authentication |
+| @stripe/stripe-js / @stripe/react-stripe-js | Payment processing |
+| tailwindcss | Utility-first CSS |
+| jodit-react | Rich text editor |
+| sweetalert2 | Alert dialogs |
+| swiper | Carousels and sliders |
+| lucide-react | Icons |
+| gsap | Animations |
+| sonner | Toast notifications |
 
-    * User dashboard to manage donation requests and activities.
-
-* Content & Funding System
-
-    * Admin and volunteers can add blogs (volunteers cannot publish).
-
-    * Authenticated users can donate funds using Stripe payment integration.
-
-## Technologies Used
-
-**Frontend**: React, React Router, React Hook Form, Tailwind CSS, Shadcn UI, TanStack Query, Axios
-
-**Others**: Firebase Auth, Stripe, Lottie, Jodit React, Zod, SweetAlert2, Swiper
-
-**Backend (separate repo)**: Node.js, Express.js, MongoDB, JWT, Firebase Admin
-
-## ▶️ Run Locally
+## Run Locally
 
 This repository contains **frontend only**.
 
-Clone the repo and run:
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/mariyamnavila/life-drop.git
+   cd life-drop
+   ```
 
-`` npm install ``
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-`` npm run dev ``
+3. Create a `.env` file in the root directory and add the following:
+   ```env
+   VITE_apiKey=your_firebase_api_key
+   VITE_authDomain=your_firebase_auth_domain
+   VITE_projectId=your_firebase_project_id
+   VITE_storageBucket=your_firebase_storage_bucket
+   VITE_messagingSenderId=your_firebase_messaging_sender_id
+   VITE_appId=your_firebase_app_id
+   VITE_payment_Key=your_stripe_public_key
+   VITE_imagebb_key=your_imagebb_api_key
+   ```
 
-Create a ``.env`` file with Firebase and Stripe credentials.
+4. Start the dev server:
+   ```bash
+   npm run dev
+   ```
 
-Backend setup is required separately:
-
-**Backend repo**: https://github.com/mariyamnavila/life-drop-server
+> **Note:** Backend setup is required separately. See the [backend repo](https://github.com/mariyamnavila/life-drop-server).
 
 ## Live & Repos
 
-Live Site: https://life-drop-17699.web.app
-
-Frontend Repo: https://github.com/mariyamnavila/life-drop
+- **Live Site:** https://life-drop-17699.web.app
+- **Backend Repo:** https://github.com/mariyamnavila/life-drop-server
