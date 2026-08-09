@@ -6,6 +6,7 @@ import Loading from "@/Pages/Loading/Loading";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import useAxios from "@/hooks/useAxios";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Blog = () => {
     const axiosInstance = useAxios()
@@ -31,6 +32,10 @@ const Blog = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-8">
+            <Helmet>
+                <title>Blogs & Articles | Life Drop</title>
+                <meta name="description" content="Read blood donation stories, awareness articles, and health updates." />
+            </Helmet>
             <h1 className="text-3xl font-bold mb-8 text-center">Our Blogs</h1>
 
             {/* Blog Cards Grid */}

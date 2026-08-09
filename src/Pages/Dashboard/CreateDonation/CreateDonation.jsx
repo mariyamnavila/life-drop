@@ -26,6 +26,7 @@ import useAuth from "@/hooks/useAuth";
 import useUserRole from "@/hooks/useUserRole";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Helmet } from "react-helmet-async";
 
 import districts from "@/assets/bangladesh_districts.json";
 import { useState } from "react";
@@ -124,6 +125,10 @@ const CreateDonation = () => {
     if (isLoading) {
         return (
             <Card className="max-w-3xl mx-auto p-6 space-y-4">
+                <Helmet>
+                    <title>Create Donation Request | Life Drop</title>
+                    <meta name="description" content="Post a new urgent blood donation request with hospital and location details." />
+                </Helmet>
                 <Skeleton className="h-6 w-1/3" />
                 <Skeleton className="h-10 w-full" />
                 <Skeleton className="h-10 w-full" />
@@ -145,6 +150,10 @@ const CreateDonation = () => {
 
     return (
         <Card className="w-full">
+            <Helmet>
+                <title>Create Donation Request | Life Drop</title>
+                <meta name="description" content="Post a new urgent blood donation request with hospital and location details." />
+            </Helmet>
             <CardHeader>
                 <CardTitle className={'text-2xl'}>Create Donation Request</CardTitle>
                 <CardDescription>Submit a new blood donation request to help those in need quickly and efficiently.</CardDescription>

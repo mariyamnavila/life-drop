@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Trash, Eye, Edit } from "lucide-react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const DonorDashboard = () => {
     const { user, loading } = useAuth();
@@ -112,6 +113,10 @@ const DonorDashboard = () => {
 
     return (
         <div className="flex flex-col items-start justify-start p-4 md:p-6 space-y-6 w-full">
+            <Helmet>
+                <title>Donor Dashboard | Life Drop</title>
+                <meta name="description" content="Manage your blood donation requests and track donation progress." />
+            </Helmet>
             <h1 className="text-2xl font-bold mb-2">
                 Welcome, {user?.displayName || user?.name || "Donor"}!
             </h1>

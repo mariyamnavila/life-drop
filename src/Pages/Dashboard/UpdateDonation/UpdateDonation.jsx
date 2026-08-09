@@ -9,6 +9,7 @@ import Loading from "@/Pages/Loading/Loading";
 import districts from "@/assets/bangladesh_districts.json";
 import Swal from "sweetalert2";
 import { format } from "date-fns";
+import { Helmet } from "react-helmet-async";
 import {
     Form,
     FormControl,
@@ -136,6 +137,10 @@ const UpdateDonation = () => {
 
     return (
         <Card className="p-6 max-w-3xl mx-auto space-y-4">
+            <Helmet>
+                <title>Update Donation Request | Life Drop</title>
+                <meta name="description" content="Edit location, hospital, or time for your existing blood request." />
+            </Helmet>
             <h1 className="text-2xl font-bold">Update Donation Request</h1>
             <Separator />
 

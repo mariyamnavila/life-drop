@@ -10,6 +10,7 @@ import { Edit, Eye, Trash } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 const MyDonationRequests = () => {
@@ -123,6 +124,10 @@ const MyDonationRequests = () => {
 
     return (
         <div className="">
+            <Helmet>
+                <title>My Donation Requests | Life Drop</title>
+                <meta name="description" content="View, update, or cancel your personal blood donation requests." />
+            </Helmet>
             <div className="mt-3 mb-5 flex flex-col md:flex-row items-center justify-between mr-3">
                 <h1 className="text-2xl font-semibold">Your Donation Requests</h1>
                 <Select

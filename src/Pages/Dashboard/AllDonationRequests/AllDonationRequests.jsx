@@ -11,6 +11,7 @@ import { Edit, Eye, Trash } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 const AllDonationRequests = () => {
@@ -123,6 +124,10 @@ const AllDonationRequests = () => {
 
     return (
         <div className="">
+            <Helmet>
+                <title>All Donation Requests | Life Drop Admin</title>
+                <meta name="description" content="Oversee, filter, and manage all blood donation requests across the platform." />
+            </Helmet>
             <div className="mt-3 mb-5 flex flex-col md:flex-row items-center justify-between mr-3">
                 <h1 className="text-2xl font-semibold">All Donation Requests</h1>
                 <Select

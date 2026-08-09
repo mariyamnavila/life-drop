@@ -3,12 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { AlertTriangle } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const Unauthorized = () => {
     const navigate = useNavigate();
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
+            <Helmet>
+                <title>Access Denied | Life Drop</title>
+                <meta name="description" content="You do not have permission to access this page." />
+            </Helmet>
             <Card className="max-w-md w-full text-center p-6">
                 <CardHeader className="flex flex-col items-center gap-2">
                     <AlertTriangle className="h-12 w-12 text-red-500" />

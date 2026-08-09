@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useAxios from "@/hooks/useAxios";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import districtsData from "@/assets/bangladesh_districts.json";
+import { Helmet } from "react-helmet-async";
 
 const DonationRequests = () => {
     const axiosInstance = useAxios();
@@ -73,6 +74,10 @@ const DonationRequests = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-5">
+            <Helmet>
+                <title>Blood Donation Requests | Life Drop</title>
+                <meta name="description" content="Browse and respond to urgent blood donation requests near your area." />
+            </Helmet>
 
             <div className="flex flex-col justify-center items-center mt-4 space-y-2">
                 <p className="text-primary font-semibold">Blood Donation Requests</p>

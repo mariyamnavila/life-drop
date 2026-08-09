@@ -5,6 +5,7 @@ import { Users, DollarSign, Droplet } from "lucide-react";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useUserRole from "@/hooks/useUserRole";
+import { Helmet } from "react-helmet-async";
 
 const AdminOrVolunteerDashboard = () => {
     const axiosSecure = useAxiosSecure();
@@ -32,15 +33,28 @@ const AdminOrVolunteerDashboard = () => {
         );
     }
 
+    const isAdmin = role === 'admin';
+
     return (
         <div className="p-6 max-w-7xl mx-auto">
+            <Helmet>
+                <title>{`${isAdmin ? 'Admin' : 'Volunteer'} Dashboard Overview | Life Drop`}</title>
+                <meta
+                    name="description"
+                    content={
+                        isAdmin
+                            ? "View platform stats, manage blood requests, users, and funding."
+                            : "Manage blood requests, create blogs, and view platform statistics."
+                    }
+                />
+            </Helmet>
             {/* Welcome Section */}
             <div className="mb-8">
                 <h1 className="text-2xl font-bold mb-2">
-                    Welcome, {role === 'admin' ? 'Admin!' : 'Volunteer'}
+                    Welcome, {isAdmin ? 'Admin!' : 'Volunteer!'}
                 </h1>
                 <p className="text-muted-foreground">
-                    This is your admin dashboard. Here you can see the platform statistics and manage users, donations, and funding.
+                    This is your {isAdmin ? 'admin' : 'volunteer'} dashboard. Here you can see the platform statistics and manage {isAdmin ? 'users, donations, and funding.' : 'donations and content.'}
                 </p>
             </div>
 

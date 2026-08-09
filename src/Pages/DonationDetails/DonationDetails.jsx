@@ -6,6 +6,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useAuth from "@/hooks/useAuth";
 import Loading from "@/Pages/Loading/Loading";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 import {
     Calendar,
     Clock,
@@ -156,6 +157,10 @@ const DonationDetails = () => {
 
     return (
         <div className="w-full space-y-6 max-w-7xl mx-auto px-3 mb-8">
+            <Helmet>
+                <title>{`Donation Request Details - ${donation.recipientName} (${donation.bloodGroup}) | Life Drop`}</title>
+                <meta name="description" content={`Urgent blood request for ${donation.recipientName} in ${donation.recipientDistrict}. Blood Group: ${donation.bloodGroup}.`} />
+            </Helmet>
             {/* Header Section */}
             <div className="space-y-2 mt-6">
                 <h1 className="text-3xl font-bold text-gray-900">Donation Details</h1>

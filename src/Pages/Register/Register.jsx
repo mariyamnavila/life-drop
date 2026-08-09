@@ -13,6 +13,7 @@ import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
 import useAxios from "@/hooks/useAxios";
+import { Helmet } from "react-helmet-async";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -104,6 +105,10 @@ const Register = () => {
 
     return (
         <div className="max-w-7xl mx-auto my-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-5">
+            <Helmet>
+                <title>Create an Account | Life Drop</title>
+                <meta name="description" content="Register as a donor or recipient on Life Drop to request or give blood." />
+            </Helmet>
             {/* LEFT: FORM */}
             <div>
                 <h2 className="text-4xl font-semibold text-primary">Register</h2>

@@ -15,6 +15,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import useUserRole from "@/hooks/useUserRole";
 import Loading from "@/Pages/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const ContentManagement = () => {
     const axiosSecure = useAxiosSecure();
@@ -99,6 +100,10 @@ const ContentManagement = () => {
 
     return (
         <div className="px-4">
+            <Helmet>
+                <title>Content Management | Life Drop Admin</title>
+                <meta name="description" content="Create, edit, and publish blogs and awareness articles." />
+            </Helmet>
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Content Management</h1>

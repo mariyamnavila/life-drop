@@ -11,6 +11,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import districtsData from "@/assets/bangladesh_districts.json";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Camera, Mail, MapPin, Droplet, User, CheckCircle2, XCircle, Loader2, Edit2, Save, X } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
     const { user, loading: authLoading } = useAuth();
@@ -150,6 +151,10 @@ const Profile = () => {
 
     return (
         <div className="max-w-4xl mx-auto mt-8 px-4 pb-8">
+            <Helmet>
+                <title>User Profile | Life Drop</title>
+                <meta name="description" content="View and update your profile details, district, upazila, and blood group." />
+            </Helmet>
             {/* Success Alert */}
             {showSuccess && (
                 <Alert className="mb-4 border-green-200 bg-green-50">

@@ -13,6 +13,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "./PaymentForm"; // your updated PaymentForm
 import Swal from "sweetalert2";
 import { Input } from "@/components/ui/input";
+import { Helmet } from "react-helmet-async";
 
 const stripePromise = loadStripe(import.meta.env.VITE_payment_Key);
 
@@ -65,6 +66,10 @@ const FundingPage = () => {
 
     return (
         <div className="p-6 max-w-7xl mx-auto">
+            <Helmet>
+                <title>Support & Fund | Life Drop</title>
+                <meta name="description" content="Contribute financial funds to support blood donation campaigns and logistics." />
+            </Helmet>
             <div className="flex flex-col md:flex-row justify-between items-center mb-4">
                 <div>
                     <h1 className="text-2xl font-semibold">Support LifeDrop</h1>

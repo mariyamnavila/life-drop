@@ -11,6 +11,7 @@ import JoditEditor from 'jodit-react';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const AddBlog = () => {
     const axiosSecure = useAxiosSecure();
@@ -113,6 +114,10 @@ const AddBlog = () => {
 
     return (
         <Card className="">
+            <Helmet>
+                <title>Add New Blog | Life Drop Admin</title>
+                <meta name="description" content="Draft a new blog post for the Life Drop community." />
+            </Helmet>
             <CardHeader>
                 <CardTitle>Add New Blog</CardTitle>
             </CardHeader>

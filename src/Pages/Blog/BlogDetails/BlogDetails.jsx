@@ -22,6 +22,7 @@ import {
     CheckCircle2
 } from "lucide-react";
 import useAxios from "@/hooks/useAxios";
+import { Helmet } from "react-helmet-async";
 
 const BlogDetails = () => {
     const { id } = useParams();
@@ -125,6 +126,10 @@ const BlogDetails = () => {
 
     return (
         <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
+            <Helmet>
+                <title>{`${data.title} | Life Drop`}</title>
+                <meta name="description" content={`Read article: ${data.title}`} />
+            </Helmet>
             {/* Back Button */}
             <div className="max-w-6xl mx-auto px-4 pt-8">
                 <Button

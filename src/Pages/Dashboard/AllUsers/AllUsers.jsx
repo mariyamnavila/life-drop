@@ -17,6 +17,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { MoreVertical } from "lucide-react";
 import Swal from "sweetalert2";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Helmet } from "react-helmet-async";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -64,6 +65,10 @@ const AllUsers = () => {
 
     return (
         <div className="p-6 space-y-6">
+            <Helmet>
+                <title>All Users Management | Life Drop Admin</title>
+                <meta name="description" content="Manage user roles (Admin, Volunteer, Donor) and account statuses." />
+            </Helmet>
             <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-semibold">All Users</h1>
 

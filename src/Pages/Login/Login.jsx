@@ -9,6 +9,7 @@ import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const { signIn } = useAuth()
@@ -52,6 +53,10 @@ const Login = () => {
 
     return (
         <div className="max-w-7xl mx-auto my-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-5">
+            <Helmet>
+                <title>Sign In | Life Drop</title>
+                <meta name="description" content="Access your Life Drop donor dashboard and manage blood requests." />
+            </Helmet>
             {/* LEFT: FORM */}
             <div className="md:p-8">
                 <h2 className="text-4xl font-semibold text-primary">Login</h2>

@@ -9,6 +9,7 @@ import { Mail, MapPin, Droplet, User, AlertCircle, Calendar } from "lucide-react
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import districtsData from "@/assets/bangladesh_districts.json";
 import useAxios from "@/hooks/useAxios";
+import { Helmet } from "react-helmet-async";
 
 const SearchDonor = () => {
     const axiosInstance = useAxios();
@@ -80,6 +81,10 @@ const SearchDonor = () => {
 
     return (
         <div className="w-full space-y-6 max-w-7xl mx-auto px-3 mb-10">
+            <Helmet>
+                <title>Search Blood Donors | Life Drop</title>
+                <meta name="description" content="Find registered blood donors by blood group, district, and upazila." />
+            </Helmet>
             {/* Header */}
             <div className="mt-6">
                 <h1 className="text-3xl font-bold text-gray-900">Search Blood Donors</h1>
