@@ -5,7 +5,6 @@ import {
     SidebarHeader,
     SidebarMenu,
     SidebarMenuItem,
-    SidebarMenuButton,
     SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { useSidebar } from '@/components/ui/use-sidebar';
@@ -24,21 +23,30 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
 
     const handleNavClick = () => {
         if (isMobile && onNavigate) {
-            onNavigate(); // Close the sheet on mobile
+            onNavigate();
         }
     };
 
+    const isCollapsed = state === "collapsed" && !isMobile;
+
+    const getLinkClass = ({ isActive }) =>
+        `flex items-center ${isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2'} w-full rounded-md text-sm font-medium transition-all ${
+            isActive
+                ? "bg-primary text-white font-semibold shadow-sm"
+                : "text-gray-700 hover:bg-red-50 hover:text-primary"
+        }`;
+
     return (
-        <Sidebar collapsible="icon" className="h-full flex flex-col">
+        <Sidebar collapsible="icon" className="h-full flex flex-col border-r bg-white text-gray-800">
             {/* Header */}
-            <SidebarHeader className="flex flex-row items-center justify-between px-4 py-3">
-                {state === "expanded" || isMobile ? (
-                    <Link to={'/'}>
-                        <img src={lifeDrop} alt="LifeDrop Logo" className="w-30" />
+            <SidebarHeader className={`flex flex-row items-center px-3 py-3 ${isCollapsed ? "justify-center" : "justify-between"}`}>
+                {!isCollapsed && (
+                    <Link to={'/'} className="flex items-center">
+                        <img src={lifeDrop} alt="LifeDrop Logo" className="w-28 h-auto" />
                     </Link>
-                ) : null}
+                )}
                 {!isMobile && (
-                    <SidebarTrigger className={'pr-3'}>
+                    <SidebarTrigger className="h-8 w-8 hover:bg-red-50 text-gray-700 hover:text-primary rounded-md flex items-center justify-center">
                         <Menu className="h-5 w-5" />
                     </SidebarTrigger>
                 )}
@@ -47,114 +55,139 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
             <Separator />
 
             {/* Navigation */}
-            <SidebarContent>
-                <SidebarMenu>
+            <SidebarContent className="px-2 py-4">
+                <SidebarMenu className="space-y-1">
+                    {/* Dashboard */}
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild tooltip="Dashboard">
-                            <NavLink to="/dashboard" end onClick={handleNavClick}>
-                                <Home />
-                                <span>Dashboard</span>
-                            </NavLink>
-                        </SidebarMenuButton>
+                        <NavLink
+                            to="/dashboard"
+                            end
+                            title="Dashboard"
+                            onClick={handleNavClick}
+                            className={getLinkClass}
+                        >
+                            <Home className="h-5 w-5 shrink-0" />
+                            {!isCollapsed && <span>Dashboard</span>}
+                        </NavLink>
                     </SidebarMenuItem>
 
                     {/* Admin links */}
-
-                    {
-                        !isLoading && role === 'admin' && <>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton asChild tooltip="All Users">
-                                    <NavLink to="/dashboard/all-users" onClick={handleNavClick}>
-                                        <Users />
-                                        <span>All Users</span>
-                                    </NavLink>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-
-                        </>
-                    }
-
-                    {/* admin and volunteer links */}
-                    {
-                        !isLoading && (role === 'admin' || role === 'volunteer') && <>
-                            <SidebarMenuItem>
-                                <SidebarMenuButton asChild tooltip="All Donation Requests">
-                                    <NavLink to="/dashboard/all-donation-requests" onClick={handleNavClick}>
-                                        <ClipboardList />
-                                        <span>All Donation Requests</span>
-                                    </NavLink>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-
-                            <SidebarMenuItem>
-                                <SidebarMenuButton asChild tooltip="Content Management">
-                                    <NavLink to="/dashboard/content-management" onClick={handleNavClick}>
-                                        <Folder /> {/* lucide-react icon */}
-                                        <span>Content Management</span>
-                                    </NavLink>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        </>
-
-                    }
-
-                    <SidebarMenuItem>
-                        <SidebarMenuButton asChild tooltip="My Requests">
-                            <NavLink to="/dashboard/my-donation-requests" onClick={handleNavClick}>
-                                <Droplet />
-                                <span>My Donation Requests</span>
+                    {!isLoading && role === 'admin' && (
+                        <SidebarMenuItem>
+                            <NavLink
+                                to="/dashboard/all-users"
+                                end
+                                title="All Users"
+                                onClick={handleNavClick}
+                                className={getLinkClass}
+                            >
+                                <Users className="h-5 w-5 shrink-0" />
+                                {!isCollapsed && <span>All Users</span>}
                             </NavLink>
-                        </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    )}
+
+                    {/* Admin and Volunteer links */}
+                    {!isLoading && (role === 'admin' || role === 'volunteer') && (
+                        <>
+                            <SidebarMenuItem>
+                                <NavLink
+                                    to="/dashboard/all-donation-requests"
+                                    end
+                                    title="All Donation Requests"
+                                    onClick={handleNavClick}
+                                    className={getLinkClass}
+                                >
+                                    <ClipboardList className="h-5 w-5 shrink-0" />
+                                    {!isCollapsed && <span>All Donation Requests</span>}
+                                </NavLink>
+                            </SidebarMenuItem>
+
+                            <SidebarMenuItem>
+                                <NavLink
+                                    to="/dashboard/content-management"
+                                    end
+                                    title="Content Management"
+                                    onClick={handleNavClick}
+                                    className={getLinkClass}
+                                >
+                                    <Folder className="h-5 w-5 shrink-0" />
+                                    {!isCollapsed && <span>Content Management</span>}
+                                </NavLink>
+                            </SidebarMenuItem>
+                        </>
+                    )}
+
+                    {/* My Requests */}
+                    <SidebarMenuItem>
+                        <NavLink
+                            to="/dashboard/my-donation-requests"
+                            end
+                            title="My Donation Requests"
+                            onClick={handleNavClick}
+                            className={getLinkClass}
+                        >
+                            <Droplet className="h-5 w-5 shrink-0" />
+                            {!isCollapsed && <span>My Donation Requests</span>}
+                        </NavLink>
                     </SidebarMenuItem>
 
+                    {/* Create Request */}
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild tooltip="Create Request">
-                            <NavLink to="/dashboard/create-donation-request" onClick={handleNavClick}>
-                                <PlusCircle />
-                                <span>Create Donation Request</span>
-                            </NavLink>
-                        </SidebarMenuButton>
+                        <NavLink
+                            to="/dashboard/create-donation-request"
+                            end
+                            title="Create Donation Request"
+                            onClick={handleNavClick}
+                            className={getLinkClass}
+                        >
+                            <PlusCircle className="h-5 w-5 shrink-0" />
+                            {!isCollapsed && <span>Create Donation Request</span>}
+                        </NavLink>
+                    </SidebarMenuItem>
+
+                    {/* Profile */}
+                    <SidebarMenuItem>
+                        <NavLink
+                            to="/dashboard/profile"
+                            end
+                            title="Profile"
+                            onClick={handleNavClick}
+                            className={getLinkClass}
+                        >
+                            <User className="h-5 w-5 shrink-0" />
+                            {!isCollapsed && <span>Profile</span>}
+                        </NavLink>
                     </SidebarMenuItem>
                 </SidebarMenu>
-
-                <SidebarMenuItem>
-                    <SidebarMenuButton asChild tooltip="Profile">
-                        <NavLink to="/dashboard/profile" onClick={handleNavClick}>
-                            <User />
-                            <span>Profile</span>
-                        </NavLink>
-                    </SidebarMenuButton>
-                </SidebarMenuItem>
-
-
             </SidebarContent>
 
             <Separator />
 
             {/* User Info Footer */}
             <Link to={'/dashboard/profile'}>
-                <SidebarFooter className="p-4">
-                    <div className="flex items-center gap-3">
-                        <div className={`relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-muted ${state === 'expanded' || isMobile ? 'left-0' : '-left-3'}`}>
+                <SidebarFooter className="p-3">
+                    <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'}`}>
+                        <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-muted border">
                             {user?.photoURL ? (
                                 <img
                                     src={user.photoURL || avatar}
-                                    alt={user.displayName}
+                                    alt={user.displayName || 'User'}
                                     className="h-full w-full object-cover"
                                 />
                             ) : (
-                                <div className="flex h-full w-full items-center justify-center text-sm font-medium text-muted-foreground">
+                                <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-gray-700">
                                     {user?.displayName?.charAt(0) || 'U'}
                                 </div>
                             )}
                         </div>
 
-                        {(state === "expanded" || isMobile) && (
+                        {!isCollapsed && (
                             <div className="flex min-w-0 flex-col">
-                                <span className="truncate text-sm font-medium">
+                                <span className="truncate text-sm font-semibold text-gray-900">
                                     {user?.displayName || 'User'}
                                 </span>
-                                <span className="truncate text-xs text-muted-foreground">
+                                <span className="truncate text-xs text-gray-500">
                                     {user?.email || ''}
                                 </span>
                             </div>
@@ -162,7 +195,6 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
                     </div>
                 </SidebarFooter>
             </Link>
-
         </Sidebar>
     );
 };
