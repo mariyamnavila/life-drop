@@ -39,7 +39,7 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
     return (
         <Sidebar collapsible="icon" className="h-full flex flex-col border-r border-border bg-bg-default text-text-primary">
             {/* Header */}
-            <SidebarHeader className={`flex flex-row items-center px-3 py-3 ${isCollapsed ? "justify-center" : "justify-between"}`}>
+            <SidebarHeader className={`flex flex-row items-center h-16 px-3 ${isCollapsed ? "justify-center" : "justify-between"}`}>
                 {!isCollapsed && (
                     <Link to={'/'} className="flex items-center">
                         <img src={lifeDrop} alt="LifeDrop Logo" className="w-28 h-auto dark:brightness-110" />

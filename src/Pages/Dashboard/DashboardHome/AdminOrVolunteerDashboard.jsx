@@ -59,20 +59,26 @@ const AdminOrVolunteerDashboard = () => {
 
     const isAdmin = role === 'admin';
 
-    // Map status data for Recharts Pie Chart
-    const statusChartData = data?.donationsByStatus?.map(item => {
+    // Map and group status data to avoid duplicates (e.g. casing differences or fallbacks)
+    const statusMap = {};
+    data?.donationsByStatus?.forEach(item => {
         const id = item._id?.toLowerCase() || 'pending';
         let name = "Pending";
         if (id === "inprogress") name = "In Progress";
         if (id === "done" || id === "completed") name = "Completed";
-        if (id === "cancelled") name = "Cancelled";
+        if (id === "cancelled" || id === "canceled") name = "Cancelled";
 
-        return {
-            name,
-            value: item.count,
-            color: STATUS_COLORS[id] || "#6b7280"
-        };
-    }) || [];
+        if (statusMap[name]) {
+            statusMap[name].value += item.count;
+        } else {
+            statusMap[name] = {
+                name,
+                value: item.count,
+                color: STATUS_COLORS[id] || "#6b7280"
+            };
+        }
+    });
+    const statusChartData = Object.values(statusMap);
 
     // Map blood group data for Recharts Bar Chart
     const bloodGroupChartData = data?.donationsByBloodGroup?.map(item => ({
