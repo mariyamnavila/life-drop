@@ -33,20 +33,20 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
         `flex items-center ${isCollapsed ? 'justify-center p-2.5' : 'gap-3 px-3 py-2'} w-full rounded-md text-sm font-medium transition-all ${
             isActive
                 ? "bg-primary text-white font-semibold shadow-sm"
-                : "text-gray-700 hover:bg-red-50 hover:text-primary"
+                : "text-text-primary hover:bg-bg-card hover:text-primary"
         }`;
 
     return (
-        <Sidebar collapsible="icon" className="h-full flex flex-col border-r bg-white text-gray-800">
+        <Sidebar collapsible="icon" className="h-full flex flex-col border-r border-border bg-bg-default text-text-primary">
             {/* Header */}
             <SidebarHeader className={`flex flex-row items-center px-3 py-3 ${isCollapsed ? "justify-center" : "justify-between"}`}>
                 {!isCollapsed && (
                     <Link to={'/'} className="flex items-center">
-                        <img src={lifeDrop} alt="LifeDrop Logo" className="w-28 h-auto" />
+                        <img src={lifeDrop} alt="LifeDrop Logo" className="w-28 h-auto dark:brightness-110" />
                     </Link>
                 )}
                 {!isMobile && (
-                    <SidebarTrigger className="h-8 w-8 hover:bg-red-50 text-gray-700 hover:text-primary rounded-md flex items-center justify-center">
+                    <SidebarTrigger className="h-8 w-8 hover:bg-bg-card text-text-primary hover:text-primary rounded-md flex items-center justify-center border border-border/10">
                         <Menu className="h-5 w-5" />
                     </SidebarTrigger>
                 )}
@@ -176,7 +176,7 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
                                     className="h-full w-full object-cover"
                                 />
                             ) : (
-                                <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-gray-700">
+                                <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-gray-700 dark:text-gray-300">
                                     {user?.displayName?.charAt(0) || 'U'}
                                 </div>
                             )}
@@ -184,10 +184,10 @@ const DashboardSidebar = ({ isMobile, onNavigate }) => {
 
                         {!isCollapsed && (
                             <div className="flex min-w-0 flex-col">
-                                <span className="truncate text-sm font-semibold text-gray-900">
+                                <span className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">
                                     {user?.displayName || 'User'}
                                 </span>
-                                <span className="truncate text-xs text-gray-500">
+                                <span className="truncate text-xs text-gray-500 dark:text-gray-400">
                                     {user?.email || ''}
                                 </span>
                             </div>

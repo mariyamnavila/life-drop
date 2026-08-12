@@ -242,7 +242,7 @@ const AllDonationRequests = () => {
                         </Table>
                     </Card>
                     {/* Pagination */}
-                    <div className="flex items-center justify-center gap-2 mt-8 flex-wrap  sticky bottom-0 bg-white py-2">
+                    <div className="flex items-center justify-center gap-2 mt-8 flex-wrap  sticky bottom-0 bg-bg-default py-2">
                         <Button
                             variant="outline"
                             size="sm"

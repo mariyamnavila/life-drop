@@ -85,7 +85,7 @@ const PaymentForm = ({ amount, onSuccess, onCancel }) => {
     };
 
     return (
-        <div className="p-4 mb-4 border rounded-md bg-white shadow-md">
+        <div className="p-4 mb-4 border border-border rounded-md bg-bg-default shadow-md text-text-primary">
             <h2 className="text-lg font-semibold mb-2">Donate ${amount}</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <CardElement className="p-3 border rounded" />

@@ -53,13 +53,13 @@ const Blog = () => {
                         <CardContent className={''}>
                             <CardHeader className="space-y-2 px-4">
                                 <CardTitle className="text-lg font-semibold">{blog.title}</CardTitle>
-                                <CardDescription className="text-gray-600 text-sm line-clamp-3">
+                                <CardDescription className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3">
                                     {/* Limit content preview to ~150 characters */}
                                     {blog.content.replace(/<[^>]+>/g, "").substring(0, 150)}...
                                 </CardDescription>
                             </CardHeader>
                             <div className="flex justify-between items-center mt-4">
-                                <p className="text-xs text-gray-500">
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
                                     By: {blog.author?.name || blog.author?.email}
                                 </p>
                                 <Link to={`/blogs/${blog._id}`}>
@@ -111,7 +111,7 @@ const Blog = () => {
                     onValueChange={(val) => { setLimit(Number(val)); setPage(0); }}
                 >
                     <SelectTrigger className="w-24">
-                        <SelectValue placeholder="Rows" className="text-center text-black truncate" />
+                            <SelectValue placeholder="Rows" className="text-center truncate" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="5">5</SelectItem>

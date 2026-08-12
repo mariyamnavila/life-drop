@@ -26,16 +26,16 @@ const BestService = () => {
     return (
         <div className="bg-soft-red-card relative ">
             <div className="max-w-7xl mx-auto px-3">
-                <div className="flex flex-col md:flex-row justify-start items-start absolute -top-20 md:-top-10 z-20">
-                    <div className="bg-white p-4  lg:w-2/5 rounded-lg">
+                <div className="flex flex-col md:flex-row justify-start items-start absolute -top-20 md:-top-10 z-20 text-text-primary">
+                    <div className="bg-bg-default border border-border/10 p-4 lg:w-2/5 rounded-lg">
                         <h1 className="text-3xl font-bold">Best Service</h1>
-                        <p className="text-gray-600 font-light ">Our commitment to excellence ensures that every individual receives the highest quality care and support.</p>
+                        <p className="text-text-muted font-light ">Our commitment to excellence ensures that every individual receives the highest quality care and support.</p>
                     </div>
                     <div className="bg-soft-red-card flex items-center md:w-full lg:w-2/5 p-4 gap-4 rounded-t-lg ">
                         <FaPeopleGroup className="text-4xl" />
                         <div>
                             <h2 className="text-2xl font-semibold">Compassionate Care</h2>
-                            <p className="text-gray-600 font-light">We prioritize empathy and understanding in all our interactions</p>
+                            <p className="text-text-muted font-light">We prioritize empathy and understanding in all our interactions</p>
                         </div>
                     </div>
                 </div>

@@ -1,27 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import LifeDrop from '../../../assets/lifedrop-logo.png';
 import avatar from '../../../assets/avatar.png';
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
+import { useTheme } from "next-themes";
+import { Sun, Moon } from "lucide-react";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    // Prevent hydration mismatch
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const links = [
         { name: "Home", path: "/", },
         { name: "Requests", path: "/donation-requests", },
         { name: "Search Donors", path: "/search-donors", },
-        // { name: "Search Requests", path: "/search-requests", },
         { name: "Blog", path: "/blogs", },
     ];
 
     if (user) {
         links.push({ name: "Funding", path: "/funding", });
     }
-
 
     const handleLogOut = () => {
         Swal.fire({
@@ -59,7 +66,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-white shadow-md sticky top-0 z-50">
+        <nav className="bg-bg-default/85 backdrop-blur-md border-b border-border/50 shadow-xs sticky top-0 z-50 transition-all duration-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
 
@@ -68,23 +75,21 @@ const Navbar = () => {
                         {/* Mobile menu button */}
                         <div className="md:hidden">
                             <button
+                                type="button"
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                className="text-primary focus:outline-none"
+                                className="relative w-10 h-10 flex flex-col justify-center items-center rounded-lg hover:bg-bg-card border border-border/10 focus:outline-none transition-colors duration-200"
+                                aria-label="Toggle Menu"
                             >
-                                {/* Hamburger icon */}
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2"
-                                    viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                                    {mobileMenuOpen ? (
-                                        <path d="M6 18L18 6M6 6l12 12" /> // X icon when open
-                                    ) : (
-                                        <path d="M4 6h16M4 12h16M4 18h16" /> // Hamburger icon when closed
-                                    )}
-                                </svg>
+                                <div className="flex flex-col justify-between w-5 h-3.5 transition-transform duration-300">
+                                    <span className={`block h-[2px] w-5 bg-text-primary rounded-full transform transition-all duration-300 origin-left ${mobileMenuOpen ? 'rotate-45 translate-x-[2px] -translate-y-[1px]' : ''}`} />
+                                    <span className={`block h-[2px] w-5 bg-text-primary rounded-full transition-all duration-300 ${mobileMenuOpen ? 'opacity-0 scale-0' : ''}`} />
+                                    <span className={`block h-[2px] w-5 bg-text-primary rounded-full transform transition-all duration-300 origin-left ${mobileMenuOpen ? '-rotate-45 translate-x-[2px] translate-y-[1px]' : ''}`} />
+                                </div>
                             </button>
                         </div>
 
                         <Link to={'/'}>
-                            <img src={LifeDrop} alt="LifeDrop Logo" className="w-30" />
+                            <img src={LifeDrop} alt="LifeDrop Logo" className="w-30 filter dark:brightness-110" />
                         </Link>
 
                     </div>
@@ -96,9 +101,7 @@ const Navbar = () => {
                                 <NavLink
                                     key={link.path}
                                     to={link.path}
-                                    className={
-                                        `flex items-center gap-1 px-2 rounded-md font-medium `
-                                    }
+                                    className="flex items-center gap-1 px-2 rounded-md font-medium text-text-primary hover:text-primary transition-colors"
                                 >
                                     {link.name}
                                 </NavLink>
@@ -106,12 +109,28 @@ const Navbar = () => {
                         })}
                     </div>
 
-                    {/* Right: Login / Avatar */}
+                    {/* Right: Theme Toggle & Login / Avatar */}
                     <div className="flex items-center gap-4">
+                        {/* Theme Toggle Button */}
+                        {mounted && (
+                            <button
+                                type="button"
+                                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                className="p-2 rounded-md hover:bg-bg-card border border-border text-text-primary transition-colors focus:outline-none"
+                                aria-label="Toggle Theme"
+                            >
+                                {theme === "dark" ? (
+                                    <Sun className="h-4 w-4 text-yellow-500" />
+                                ) : (
+                                    <Moon className="h-4 w-4 text-text-muted" />
+                                )}
+                            </button>
+                        )}
+
                         {!user ? (
                             <Link
                                 to="/login"
-                                className="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-md font-medium"
+                                className="px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-md font-medium transition-colors"
                             >
                                 Login
                             </Link>
@@ -120,20 +139,20 @@ const Navbar = () => {
                                 <img
                                     src={user.photoURL || avatar}
                                     alt="User Avatar"
-                                    className="w-10 h-10 rounded-full cursor-pointer"
+                                    className="w-10 h-10 rounded-full cursor-pointer border border-border object-cover"
                                     onClick={() => setProfileMenuOpen(!profileMenuOpen)}
                                 />
                                 {profileMenuOpen && (
-                                    <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md p-4 flex flex-col gap-2 ">
+                                    <div className="absolute right-0 mt-2 w-40 bg-bg-default border border-border shadow-lg rounded-md p-4 flex flex-col gap-2 transition-all">
                                         <NavLink
                                             to="/dashboard"
-                                            className="hover:text-primary"
+                                            className="text-text-primary hover:text-primary transition-colors"
                                             onClick={() => setProfileMenuOpen(false)}
                                         >
                                             Dashboard
                                         </NavLink>
                                         <p
-                                            className="hover:text-primary cursor-pointer"
+                                            className="text-text-primary hover:text-primary cursor-pointer transition-colors"
                                             onClick={handleLogOut}
                                         >
                                             Logout
@@ -145,16 +164,16 @@ const Navbar = () => {
                     </div>
                 </div>
                 {mobileMenuOpen && (
-                    <div className="md:hidden bg-white shadow-md p-4 flex flex-col gap-2 mt-2">
+                    <div className="md:hidden bg-bg-default border border-border shadow-md p-4 flex flex-col gap-2 mt-2 transition-all">
                         {links.map((link) => {
                             return (
                                 <NavLink
                                     key={link.path}
                                     to={link.path}
                                     className={({ isActive }) =>
-                                        `flex items-center gap-2 px-3 py-2 rounded-md font-medium ${isActive
-                                            ? "text-primary bg-soft-red-card"
-                                            : "text-text-primary hover:bg-soft-red-card"
+                                        `flex items-center gap-2 px-3 py-2 rounded-md font-medium transition-colors ${isActive
+                                            ? "text-primary bg-bg-card border border-border"
+                                            : "text-text-primary hover:bg-bg-card"
                                         }`
                                     }
                                     onClick={() => setMobileMenuOpen(false)}

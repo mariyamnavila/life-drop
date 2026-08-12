@@ -85,11 +85,11 @@ const DonationRequests = () => {
             <div className="flex flex-col justify-center items-center mt-4 space-y-2">
                 <p className="text-primary font-semibold">Blood Donation Requests</p>
                 <h1 className="text-4xl font-semibold">Pending Donation Requests</h1>
-                <p className="text-gray-500">Review and manage all blood donation requests that are currently awaiting donor response.</p>
+                <p className="text-gray-500 dark:text-gray-400">Review and manage all blood donation requests that are currently awaiting donor response.</p>
             </div>
 
             {/* Search/Filter Section */}
-            <div className="mt-8 bg-white border rounded-lg p-4 shadow-sm">
+            <div className="mt-8 bg-bg-default border border-border rounded-lg p-4 shadow-sm">
                 <div className="flex flex-wrap gap-4 items-end">
                     {/* Blood Group Filter */}
                     <div className="flex-1 min-w-37.5">
@@ -161,7 +161,7 @@ const DonationRequests = () => {
                     {data?.donations?.map((donation) => (
                         <Card
                             key={donation._id}
-                            className="bg-red-50 border-red-100 shadow-sm hover:shadow-md transition"
+                            className="bg-red-50 dark:bg-red-950/30 border-red-100 dark:border-red-900/40 shadow-sm hover:shadow-md transition"
                         >
                             <CardHeader className="flex flex-row items-center justify-between">
                                 <h3 className="font-semibold text-lg">
@@ -214,7 +214,7 @@ const DonationRequests = () => {
                 {/* No Results Message */}
                 {data?.donations?.length === 0 && (
                     <div className="text-center py-12">
-                        <p className="text-gray-500 text-lg">No donation requests found matching your filters.</p>
+                        <p className="text-gray-500 dark:text-gray-400 text-lg">No donation requests found matching your filters.</p>
                         <Button variant="link" onClick={handleReset} className="mt-2">
                             Clear filters
                         </Button>

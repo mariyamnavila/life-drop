@@ -48,7 +48,7 @@ const Testimonials = () => {
             <div className='lg:col-span-1 '>
                 <p className='text-primary font-semibold'>Testimonial</p>
                 <h2 className='text-3xl md:text-5xl font-semibold mt-3'>Testimonials</h2>
-                <p className='text-gray-500 mt-5 max-w-lg'>
+                <p className='text-gray-500 dark:text-gray-400 mt-5 max-w-lg'>
                     Hear from donors and recipients who have experienced the impact of our work firsthand. Their stories reflect the care, trust, and hope we strive to deliver every day.
                 </p>
                 <Button className={'bg-primary mt-6'}>View More</Button>

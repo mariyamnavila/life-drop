@@ -9,7 +9,7 @@ const Unauthorized = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
+        <div className="flex items-center justify-center min-h-screen bg-bg-default p-4">
             <Helmet>
                 <title>Access Denied | Life Drop</title>
                 <meta name="description" content="You do not have permission to access this page." />
@@ -19,7 +19,7 @@ const Unauthorized = () => {
                     <AlertTriangle className="h-12 w-12 text-red-500" />
                     <h2 className="text-2xl font-bold text-red-600">Unauthorized</h2>
                 </CardHeader>
-                <CardContent className="mt-4 text-gray-700">
+                <CardContent className="mt-4 text-text-primary">
                     <p>
                         You do not have permission to access this page.
                     </p>

@@ -64,9 +64,9 @@ const SocialLogin = () => {
         <div className="mt-6">
             {/* Divider */}
             <div className="flex items-center gap-3 mb-4">
-                <div className="grow border-t border-gray-200"></div>
-                <span className="text-sm text-gray-500">or continue with</span>
-                <div className="grow border-t border-gray-200"></div>
+                <div className="grow border-t border-gray-200 dark:border-gray-700"></div>
+                <span className="text-sm text-gray-500 dark:text-gray-400">or continue with</span>
+                <div className="grow border-t border-gray-200 dark:border-gray-700"></div>
             </div>
 
             {/* Google Button */}

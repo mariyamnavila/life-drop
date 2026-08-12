@@ -66,7 +66,7 @@ const Login = () => {
             {/* LEFT: FORM */}
             <div className="md:p-8">
                 <h2 className="text-4xl font-semibold text-primary">Login</h2>
-                <p className="text-gray-500 mt-3 max-w-lg">
+                <p className="text-gray-500 dark:text-gray-400 mt-3 max-w-lg">
                     Welcome back! Please enter your credentials to access your account.
                 </p>
 
@@ -102,7 +102,7 @@ const Login = () => {
                     </div>
 
                     {/* Already have an account / register link */}
-                    <p className="text-sm text-gray-500 text-center mt-2">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-2">
                         Don't have an account?{" "}
                         <Link
                             to="/register"
@@ -118,7 +118,7 @@ const Login = () => {
 
                 {/* Instant Demo Credentials Section */}
                 <div className="mt-8 border-t pt-6">
-                    <p className="text-sm font-semibold text-gray-700 mb-3">Instant Demo Login:</p>
+                    <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Instant Demo Login:</p>
                     <div className="grid grid-cols-3 gap-2">
                         <Button
                             type="button"
@@ -126,8 +126,8 @@ const Login = () => {
                             className="flex flex-col items-center justify-center p-4 h-auto border hover:border-primary hover:text-primary transition-all group"
                             onClick={() => handleDemoLogin("life@drop.com", "12345678")}
                         >
-                            <span className="text-xs font-bold uppercase tracking-wider text-gray-800 group-hover:text-primary">Admin</span>
-                            <span className="text-[10px] text-gray-400 truncate max-w-full">life@drop.com</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-gray-800 dark:text-gray-200 group-hover:text-primary">Admin</span>
+                            <span className="text-[10px] text-gray-400 dark:text-gray-500 truncate max-w-full">life@drop.com</span>
                         </Button>
                         <Button
                             type="button"
@@ -135,8 +135,8 @@ const Login = () => {
                             className="flex flex-col items-center justify-center p-4 h-auto border hover:border-primary hover:text-primary transition-all group"
                             onClick={() => handleDemoLogin("ri.ro@ri.ro", "12345678")}
                         >
-                            <span className="text-xs font-bold uppercase tracking-wider text-gray-800 group-hover:text-primary">Volunteer</span>
-                            <span className="text-[10px] text-gray-400 truncate max-w-full">ri.ro@ri.ro</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-gray-800 dark:text-gray-200 group-hover:text-primary">Volunteer</span>
+                            <span className="text-[10px] text-gray-400 dark:text-gray-500 truncate max-w-full">ri.ro@ri.ro</span>
                         </Button>
                         <Button
                             type="button"
@@ -144,8 +144,8 @@ const Login = () => {
                             className="flex flex-col items-center justify-center p-4 h-auto border hover:border-primary hover:text-primary transition-all group"
                             onClick={() => handleDemoLogin("bibimariyamnavila@gmail.com", "12345678")}
                         >
-                            <span className="text-xs font-bold uppercase tracking-wider text-gray-800 group-hover:text-primary">Donor</span>
-                            <span className="text-[10px] text-gray-400 truncate max-w-full text-ellipsis overflow-hidden">bibimariyam...</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-gray-800 dark:text-gray-200 group-hover:text-primary">Donor</span>
+                            <span className="text-[10px] text-gray-400 dark:text-gray-500 truncate max-w-full text-ellipsis overflow-hidden">bibimariyam...</span>
                         </Button>
                     </div>
                 </div>

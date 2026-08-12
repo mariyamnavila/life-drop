@@ -141,7 +141,7 @@ const MyDonationRequests = () => {
                     }}
                 >
                     <SelectTrigger className="w-34">
-                        <SelectValue placeholder="Status" className="text-center text-black truncate" />
+                        <SelectValue placeholder="Status" className="text-center truncate" />
                     </SelectTrigger>
                     <SelectContent >
                         <SelectItem value="all">All</SelectItem>
@@ -237,7 +237,7 @@ const MyDonationRequests = () => {
                         </Table>
                     </Card>
                     {/* Pagination */}
-                    <div className="flex items-center justify-center gap-2 mt-8 flex-wrap  sticky bottom-0 bg-white py-2">
+                    <div className="flex items-center justify-center gap-2 mt-8 flex-wrap  sticky bottom-0 bg-bg-default py-2">
                         <Button
                             variant="outline"
                             size="sm"
@@ -275,7 +275,7 @@ const MyDonationRequests = () => {
                             }}
                         >
                             <SelectTrigger className="w-24">
-                                <SelectValue placeholder="Rows" className="text-center text-black truncate" />
+                                <SelectValue placeholder="Rows" className="text-center truncate" />
                             </SelectTrigger>
                             <SelectContent >
                                 <SelectItem value="5">5</SelectItem>

@@ -76,7 +76,7 @@ const FundingPage = () => {
             <div className="flex flex-col md:flex-row justify-between items-center mb-4">
                 <div>
                     <h1 className="text-2xl font-semibold">Support LifeDrop</h1>
-                    <p className="text-gray-500 mt-1">
+                    <p className="text-gray-500 dark:text-gray-400 mt-1">
                         Contribute to our cause and help us facilitate blood donations for those in need.
                     </p>
                 </div>
@@ -137,7 +137,7 @@ const FundingPage = () => {
                     </Card>
 
                     {/* Pagination */}
-                    <div className="flex items-center justify-center gap-2 mt-8 flex-wrap sticky bottom-0 bg-white py-2">
+                    <div className="flex items-center justify-center gap-2 mt-8 flex-wrap sticky bottom-0 bg-bg-default py-2">
                         <Button
                             variant="outline"
                             size="sm"
@@ -175,7 +175,7 @@ const FundingPage = () => {
                             }}
                         >
                             <SelectTrigger className="w-24">
-                                <SelectValue placeholder="Rows" className="text-center text-black truncate" />
+                                <SelectValue placeholder="Rows" className="text-center truncate" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="5">5</SelectItem>

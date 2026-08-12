@@ -17,31 +17,31 @@ const ContactUs = () => {
                  items-stretch px-5"
         >
             {/* LEFT: TEXT SECTION */}
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center text-text-primary">
                 <p className="text-primary font-semibold">Contact Us</p>
 
                 <h2 className="text-3xl md:text-5xl font-semibold mt-3">
                     Get In Touch With Us
                 </h2>
 
-                <p className="text-gray-500 mt-5 max-w-lg">
+                <p className="text-text-muted mt-5 max-w-lg">
                     Have questions, need help, or want to support our mission?
                     Reach out anytime. We’re here to help and guide you.
                 </p>
 
                 {/* CONTACT INFO */}
                 <div className="mt-8 space-y-4">
-                    <div className="flex items-center gap-3 text-gray-600">
+                    <div className="flex items-center gap-3 text-text-muted">
                         <Phone className="text-primary w-5 h-5" />
                         <span>+880 1234 567 890</span>
                     </div>
 
-                    <div className="flex items-center gap-3 text-gray-600">
+                    <div className="flex items-center gap-3 text-text-muted">
                         <Mail className="text-primary w-5 h-5" />
                         <span>support@lifedrop.com</span>
                     </div>
 
-                    <div className="flex items-center gap-3 text-gray-600">
+                    <div className="flex items-center gap-3 text-text-muted">
                         <MapPin className="text-primary w-5 h-5" />
                         <span>Chittagong, Bangladesh</span>
                     </div>

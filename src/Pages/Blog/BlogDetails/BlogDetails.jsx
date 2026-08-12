@@ -58,8 +58,8 @@ const BlogDetails = () => {
                             />
                         </svg>
                     </div>
-                    <h2 className="text-2xl font-semibold text-gray-700 mb-2">Blog Not Found</h2>
-                    <p className="text-gray-500">The blog post you're looking for doesn't exist.</p>
+                    <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Blog Not Found</h2>
+                    <p className="text-gray-500 dark:text-gray-400">The blog post you're looking for doesn't exist.</p>
                 </Card>
             </div>
         );
@@ -125,7 +125,7 @@ const BlogDetails = () => {
     };
 
     return (
-        <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
+        <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-[#1a1d23] dark:to-[#1a1d23]">
             <Helmet>
                 <title>{`${data.title} | Life Drop`}</title>
                 <meta name="description" content={`Read article: ${data.title}`} />
@@ -153,12 +153,12 @@ const BlogDetails = () => {
                     )}
 
                     {/* Title */}
-                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
                         {data.title}
                     </h1>
 
                     {/* Meta Information */}
-                    <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-6">
+                    <div className="flex flex-wrap items-center gap-6 text-gray-600 dark:text-gray-400 mb-6">
                         <div className="flex items-center gap-2">
                             <User className="h-4 w-4" />
                             <span className="text-sm font-medium">
@@ -230,8 +230,8 @@ const BlogDetails = () => {
                                     <Share2 className="h-5 w-5 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-gray-900">Share this article</h3>
-                                    <p className="text-sm text-gray-500">Spread the knowledge!</p>
+                                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">Share this article</h3>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">Spread the knowledge!</p>
                                 </div>
                             </div>
 
@@ -293,20 +293,20 @@ const BlogDetails = () => {
 
                 {/* Author Card (Optional) */}
                 {data.author && (
-                    <Card className="mt-8 bg-linear-to-r from-gray-50 to-white border-2">
+                    <Card className="mt-8 bg-linear-to-r from-gray-50 to-white dark:from-[#22262e] dark:to-[#22262e] border-2 dark:border-[#33383f]">
                         <CardContent className="p-8">
                             <div className="flex items-start gap-6">
                                 <div className="bg-linear-to-br from-red-500 to-pink-500 rounded-full p-4 shrink-0">
                                     <User className="h-8 w-8 text-white" />
                                 </div>
                                 <div className="flex-1">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                                         About the Author
                                     </h3>
-                                    <p className="text-lg font-semibold text-gray-700 mb-2">
+                                    <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">
                                         {data.author.name || data.author.email}
                                     </p>
-                                    <p className="text-gray-600">
+                                    <p className="text-gray-600 dark:text-gray-400">
                                         {data.author.bio || "Passionate writer sharing insights and stories."}
                                     </p>
                                 </div>

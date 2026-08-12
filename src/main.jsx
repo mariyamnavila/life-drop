@@ -9,6 +9,8 @@ import AuthProvider from './contexts/AuthContext/AuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
 
+import { ThemeProvider } from "next-themes";
+
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')).render(
@@ -16,7 +18,9 @@ createRoot(document.getElementById('root')).render(
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <RouterProvider router={router} />
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+            <RouterProvider router={router} />
+          </ThemeProvider>
         </AuthProvider>
       </QueryClientProvider>
     </HelmetProvider>

@@ -89,8 +89,8 @@ const SearchPage = () => {
         <div className="w-full space-y-6 max-w-7xl mx-auto px-3 mb-10">
             {/* Header */}
             <div className="mt-6">
-                <h1 className="text-3xl font-bold text-gray-900">Search Blood Donors</h1>
-                <p className="text-gray-600 mt-1">Find blood donation requests by blood group and location</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Search Blood Donors</h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">Find blood donation requests by blood group and location</p>
             </div>
 
             {/* Search Filters Card */}
@@ -192,8 +192,8 @@ const SearchPage = () => {
                 <Card>
                     <CardContent className="p-12 text-center">
                         <Droplet className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">No Results Found</h3>
-                        <p className="text-gray-600">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">No Results Found</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
                             No donation requests match your search criteria. Try adjusting your filters.
                         </p>
                     </CardContent>
@@ -205,8 +205,8 @@ const SearchPage = () => {
                 <Card className={'mb-10'}>
                     <CardContent className="p-12 text-center">
                         {/* <Droplet className="h-12 w-12 mx-auto text-blue-400 mb-4" /> */}
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Ready to Search</h3>
-                        <p className="text-gray-600">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Ready to Search</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
                             Select your search criteria above and click "Search" to find donation requests.
                         </p>
                     </CardContent>
@@ -217,7 +217,7 @@ const SearchPage = () => {
             {!isLoading && results.length > 0 && (
                 <>
                     <div className="flex justify-between items-center">
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                             Found {results.length} {results.length === 1 ? 'Request' : 'Requests'}
                         </h2>
                     </div>
@@ -228,8 +228,8 @@ const SearchPage = () => {
                                 <CardHeader>
                                     <div className="flex justify-between items-start">
                                         <div className="flex items-center gap-2">
-                                            <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center">
-                                                <Droplet className="h-6 w-6 text-red-600" />
+                                            <div className="h-12 w-12 rounded-full bg-red-100 dark:bg-red-900/40 flex items-center justify-center">
+                                                <Droplet className="h-6 w-6 text-red-600 dark:text-red-400" />
                                             </div>
                                             <div>
                                                 <CardTitle className="text-lg">
@@ -245,45 +245,45 @@ const SearchPage = () => {
                                 </CardHeader>
                                 <CardContent className="space-y-3">
                                     <div className="flex items-start gap-2 text-sm">
-                                        <User className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
+                                        <User className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5 shrink-0" />
                                         <div>
-                                            <p className="font-medium text-gray-900">
+                                            <p className="font-medium text-gray-900 dark:text-gray-100">
                                                 {request.recipientName}
                                             </p>
-                                            <p className="text-gray-600 text-xs">Recipient</p>
+                                            <p className="text-gray-600 dark:text-gray-400 text-xs">Recipient</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start gap-2 text-sm">
-                                        <MapPin className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
+                                        <MapPin className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5 shrink-0" />
                                         <div>
-                                            <p className="text-gray-900">
+                                            <p className="text-gray-900 dark:text-gray-100">
                                                 {request.recipientUpazila}, {request.recipientDistrict}
                                             </p>
-                                            <p className="text-gray-600 text-xs">Location</p>
+                                            <p className="text-gray-600 dark:text-gray-400 text-xs">Location</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start gap-2 text-sm">
-                                        <Hospital className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
+                                        <Hospital className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5 shrink-0" />
                                         <div>
-                                            <p className="text-gray-900">
+                                            <p className="text-gray-900 dark:text-gray-100">
                                                 {request.hospitalName}
                                             </p>
-                                            <p className="text-gray-600 text-xs">Hospital</p>
+                                            <p className="text-gray-600 dark:text-gray-400 text-xs">Hospital</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-center gap-4 text-sm">
                                         <div className="flex items-center gap-2">
-                                            <CalendarDays className="h-4 w-4 text-gray-500" />
-                                            <span className="text-gray-900">
+                                            <CalendarDays className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+                                            <span className="text-gray-900 dark:text-gray-100">
                                                 {formatDate(request.donationDate)}
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Clock className="h-4 w-4 text-gray-500" />
-                                            <span className="text-gray-900">
+                                            <Clock className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+                                            <span className="text-gray-900 dark:text-gray-100">
                                                 {request.donationTime}
                                             </span>
                                         </div>
@@ -291,7 +291,7 @@ const SearchPage = () => {
 
                                     {request.requestMessage && (
                                         <div className="pt-2">
-                                            <p className="text-sm text-gray-600 italic line-clamp-2">
+                                            <p className="text-sm text-gray-600 dark:text-gray-400 italic line-clamp-2">
                                                 "{request.requestMessage}"
                                             </p>
                                         </div>

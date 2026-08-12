@@ -112,7 +112,7 @@ const Register = () => {
             {/* LEFT: FORM */}
             <div>
                 <h2 className="text-4xl font-semibold text-primary">Register</h2>
-                <p className="text-gray-500 mt-3 max-w-lg">
+                <p className="text-gray-500 dark:text-gray-400 mt-3 max-w-lg">
                     Join our blood donation community and make a difference. Fill the form below to get started.
                 </p>
 
@@ -292,7 +292,7 @@ const Register = () => {
                         {errors.confirm_password && <p className="text-red-500 text-sm">{errors.confirm_password.message}</p>}
                     </div>
                     {/* Already registered text */}
-                    <p className="text-sm text-gray-500 text-center mt-2">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-2">
                         Already have an account?{" "}
                         <Link
                             to="/login"

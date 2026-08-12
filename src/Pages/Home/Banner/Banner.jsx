@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Banner = () => {
     return (
         <div className="bg-[url('./assets/Hero.jpg')] bg-cover h-150 flex justify-end">
-            <div className='md:w-1/2 bg-white/80 h-150 flex flex-col justify-center items-start p-12 '>
+            <div className='md:w-1/2 bg-white/80 dark:bg-slate-950/80 h-150 flex flex-col justify-center items-start p-12 text-text-primary transition-colors duration-200'>
                 <h1 className='text-5xl font-bold'>Donate Your Blood to Us, Save More Life Together</h1>
-                <p className='mt-6 text-gray-700'>Join us in making a difference. Your donation can save lives.Together, we can create a stronger, healthier community—one donation at a time.</p>
+                <p className='mt-6 text-text-muted'>Join us in making a difference. Your donation can save lives.Together, we can create a stronger, healthier community—one donation at a time.</p>
                 <Link to={'/register'}>
                     <Button className='mt-6 bg-primary hover:bg-primary-hover text-white'>Get Started</Button>
                 </Link>

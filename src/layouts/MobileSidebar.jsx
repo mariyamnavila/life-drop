@@ -18,15 +18,15 @@ const MobileSidebar = ({ onClose }) => {
         `flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all ${
             isActive
                 ? "bg-primary text-white font-semibold shadow-sm"
-                : "text-gray-700 hover:bg-red-50 hover:text-primary"
+                : "text-text-primary hover:bg-bg-card hover:text-primary"
         }`;
 
     return (
-        <div className="flex flex-col h-full bg-white text-gray-800">
+        <div className="flex flex-col h-full bg-bg-default text-text-primary">
             {/* Header */}
             <div className="px-4 py-3">
                 <Link to={'/'} onClick={onClose}>
-                    <img src={lifeDrop} alt="LifeDrop Logo" className="w-28 h-auto" />
+                    <img src={lifeDrop} alt="LifeDrop Logo" className="w-28 h-auto dark:brightness-110" />
                 </Link>
             </div>
 
@@ -118,17 +118,17 @@ const MobileSidebar = ({ onClose }) => {
                                 className="h-full w-full object-cover"
                             />
                         ) : (
-                            <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-gray-700">
+                            <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-gray-700 dark:text-gray-300">
                                 {user?.displayName?.charAt(0) || 'U'}
                             </div>
                         )}
                     </div>
 
                     <div className="flex min-w-0 flex-col">
-                        <span className="truncate text-sm font-semibold text-gray-900">
+                        <span className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">
                             {user?.displayName || 'User'}
                         </span>
-                        <span className="truncate text-xs text-gray-500">
+                        <span className="truncate text-xs text-gray-500 dark:text-gray-400">
                             {user?.email || ''}
                         </span>
                     </div>
