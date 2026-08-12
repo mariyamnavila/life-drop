@@ -12,32 +12,32 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-    const { signIn } = useAuth()
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { signIn } = useAuth();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
-    const location = useLocation()
-    const navigate = useNavigate()
-    const from = location.state?.from?.pathname || '/'
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
 
     const onSubmit = (data) => {
-        // console.log(data);
-        // handle login API here
-        const { email, password } = data
+        const { email, password } = data;
+        executeLogin(email, password);
+    };
 
+    const executeLogin = (email, password) => {
         signIn(email, password)
             .then((result) => {
-                // console.log(result);
                 Swal.fire({
                     icon: "success",
                     title: "Login Successful",
                     text: "Welcome back! You have been logged in successfully.",
                     confirmButtonText: "Continue",
-                    confirmButtonColor: "#2563eb", // matches primary blue tone
+                    confirmButtonColor: "#2563eb",
                     timer: 2500,
                     timerProgressBar: true
                 });
-                navigate(from, { replace: true })
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 console.log(error);
@@ -46,9 +46,15 @@ const Login = () => {
                     title: "Login Failed",
                     text: error?.message || "Something went wrong. Please try again.",
                     confirmButtonText: "Try Again",
-                    confirmButtonColor: "#dc2626" // professional red
+                    confirmButtonColor: "#dc2626"
                 });
-            })
+            });
+    };
+
+    const handleDemoLogin = (email, password) => {
+        setValue("email", email);
+        setValue("password", password);
+        executeLogin(email, password);
     };
 
     return (
@@ -109,7 +115,43 @@ const Login = () => {
 
                     <Button className="bg-primary w-full mt-2">Login</Button>
                 </form>
-                {/* <SocialLogin/> */}
+
+                {/* Instant Demo Credentials Section */}
+                <div className="mt-8 border-t pt-6">
+                    <p className="text-sm font-semibold text-gray-700 mb-3">Instant Demo Login:</p>
+                    <div className="grid grid-cols-3 gap-2">
+                        <Button
+                            type="button"
+                            variant="outline"
+                            className="flex flex-col items-center justify-center p-4 h-auto border hover:border-primary hover:text-primary transition-all group"
+                            onClick={() => handleDemoLogin("life@drop.com", "12345678")}
+                        >
+                            <span className="text-xs font-bold uppercase tracking-wider text-gray-800 group-hover:text-primary">Admin</span>
+                            <span className="text-[10px] text-gray-400 truncate max-w-full">life@drop.com</span>
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            className="flex flex-col items-center justify-center p-4 h-auto border hover:border-primary hover:text-primary transition-all group"
+                            onClick={() => handleDemoLogin("ri.ro@ri.ro", "12345678")}
+                        >
+                            <span className="text-xs font-bold uppercase tracking-wider text-gray-800 group-hover:text-primary">Volunteer</span>
+                            <span className="text-[10px] text-gray-400 truncate max-w-full">ri.ro@ri.ro</span>
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            className="flex flex-col items-center justify-center p-4 h-auto border hover:border-primary hover:text-primary transition-all group"
+                            onClick={() => handleDemoLogin("bibimariyamnavila@gmail.com", "12345678")}
+                        >
+                            <span className="text-xs font-bold uppercase tracking-wider text-gray-800 group-hover:text-primary">Donor</span>
+                            <span className="text-[10px] text-gray-400 truncate max-w-full text-ellipsis overflow-hidden">bibimariyam...</span>
+                        </Button>
+                    </div>
+                </div>
+
+                {/* Social Logins */}
+                <SocialLogin />
             </div>
 
             {/* RIGHT: Lottie Animation (desktop only) */}

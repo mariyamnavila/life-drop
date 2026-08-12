@@ -304,7 +304,7 @@ const Register = () => {
                     </p>
                     <Button className="bg-primary w-full mt-4">Register</Button>
                 </form>
-                {/* <SocialLogin /> */}
+                <SocialLogin />
             </div>
 
             {/* RIGHT: Lottie Animation (desktop only) */}
