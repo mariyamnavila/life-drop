@@ -30,8 +30,8 @@ const Footer = () => {
                 <div className="flex flex-col gap-2">
                     <h4 className="font-semibold text-white mb-2">Useful Links</h4>
                     <NavLink to="/" className="hover:text-soft-red-card text-sm">Home</NavLink>
-                    <NavLink to="/donors" className="hover:text-soft-red-card text-sm">Donors</NavLink>
-                    <NavLink to="/requests" className="hover:text-soft-red-card text-sm">Requests</NavLink>
+                    <NavLink to="/search-donors" className="hover:text-soft-red-card text-sm">Donors</NavLink>
+                    <NavLink to="/donation-requests" className="hover:text-soft-red-card text-sm">Requests</NavLink>
                     <NavLink to="/funding" className="hover:text-soft-red-card text-sm">Funding</NavLink>
                 </div>
 

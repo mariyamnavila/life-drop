@@ -24,6 +24,10 @@ import ContentManagement from "@/Pages/Dashboard/ContentManagement/ContentManage
 import Blogs from "@/Pages/Blog/Blog";
 import BlogDetails from "@/Pages/Blog/BlogDetails/BlogDetails";
 import SearchDonor from "@/Pages/SearchPage/SearchDonor";
+import About from "@/Pages/Static/About";
+import FAQPage from "@/Pages/Static/FAQPage";
+import Terms from "@/Pages/Static/Terms";
+import Charity from "@/Pages/Static/Charity";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +77,22 @@ const router = createBrowserRouter([
       {
         path: 'unauthorized',
         Component: Unauthorized,
+      },
+      {
+        path: 'about',
+        Component: About,
+      },
+      {
+        path: 'charity',
+        Component: Charity,
+      },
+      {
+        path: 'faq',
+        Component: FAQPage,
+      },
+      {
+        path: 'terms',
+        Component: Terms,
       },
     ]
   },
