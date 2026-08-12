@@ -9,7 +9,8 @@ import useAxios from "@/hooks/useAxios";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import districtsData from "@/assets/bangladesh_districts.json";
 import { Helmet } from "react-helmet-async";
-import { Droplet, MapPin, Calendar, Clock } from "lucide-react";
+import { Droplet, MapPin, Calendar, Clock, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 const DonationRequests = () => {
     const axiosInstance = useAxios();
@@ -20,6 +21,9 @@ const DonationRequests = () => {
     const [bloodGroup, setBloodGroup] = useState("");
     const [district, setDistrict] = useState("");
     const [upazila, setUpazila] = useState("");
+    const [searchVal, setSearchVal] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [sortBy, setSortBy] = useState("newest");
 
     // Derive upazilas from district using useMemo
     const upazilas = useMemo(() => {
@@ -34,7 +38,7 @@ const DonationRequests = () => {
     };
 
     const { data, isLoading } = useQuery({
-        queryKey: ["pending-donations", page, limit, bloodGroup, district, upazila],
+        queryKey: ["pending-donations", page, limit, bloodGroup, district, upazila, searchQuery, sortBy],
         queryFn: async () => {
             const params = new URLSearchParams({
                 page: page,
@@ -44,6 +48,8 @@ const DonationRequests = () => {
             if (bloodGroup) params.append("blood_group", bloodGroup);
             if (district) params.append("district", district);
             if (upazila) params.append("upazila", upazila);
+            if (searchQuery) params.append("search", searchQuery);
+            if (sortBy) params.append("sort", sortBy);
 
             const res = await axiosInstance.get(
                 `/donations/pending?${params.toString()}`
@@ -59,10 +65,18 @@ const DonationRequests = () => {
     const totalPages = Math.ceil((data?.totalCount || 0) / limit);
     const pages = [...Array(totalPages).keys()];
 
+    const handleSearchClick = () => {
+        setSearchQuery(searchVal);
+        setPage(0);
+    };
+
     const handleReset = () => {
         setBloodGroup("");
         setDistrict("");
         setUpazila("");
+        setSearchVal("");
+        setSearchQuery("");
+        setSortBy("newest");
         setPage(0);
     };
 
@@ -90,67 +104,108 @@ const DonationRequests = () => {
             </div>
 
             {/* Search/Filter Section */}
-            <div className="mt-8 bg-bg-default border border-border rounded-lg p-4 shadow-sm">
-                <div className="flex flex-wrap gap-4 items-end">
-                    {/* Blood Group Filter */}
-                    <div className="flex-1 min-w-37.5">
-                        <label className="text-sm font-medium mb-2 block">Blood Group</label>
-                        <Select value={bloodGroup} onValueChange={setBloodGroup}>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="All" />
+            <div className="mt-8 bg-bg-default border border-border rounded-lg p-6 shadow-sm space-y-6">
+                
+                {/* Search Bar & Sorting */}
+                <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-end">
+                    {/* Text Search */}
+                    <div className="flex-1">
+                        <label className="text-sm font-medium mb-2 block text-text-primary">Search Requests</label>
+                        <div className="flex gap-2">
+                            <Input
+                                placeholder="Search recipient name, hospital, or address..."
+                                value={searchVal}
+                                onChange={(e) => setSearchVal(e.target.value)}
+                                onKeyDown={(e) => e.key === "Enter" && handleSearchClick()}
+                                className="flex-1 bg-bg-default border border-border text-text-primary focus-visible:ring-primary"
+                            />
+                            <Button onClick={handleSearchClick} className="bg-primary hover:bg-primary-hover text-white font-medium shrink-0 cursor-pointer">
+                                <Search className="h-4 w-4 mr-2" />
+                                Search
+                            </Button>
+                        </div>
+                    </div>
+
+                    {/* Sorting Dropdown */}
+                    <div className="w-full sm:w-56">
+                        <label className="text-sm font-medium mb-2 block text-text-primary">Sort By</label>
+                        <Select value={sortBy} onValueChange={setSortBy}>
+                            <SelectTrigger className="w-full bg-bg-default border border-border text-text-primary">
+                                <SelectValue placeholder="Sort By" />
                             </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">All</SelectItem>
-                                {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map(bg => (
-                                    <SelectItem key={bg} value={bg}>{bg}</SelectItem>
-                                ))}
+                            <SelectContent className="bg-bg-default border border-border">
+                                <SelectItem value="newest">Newest Requests</SelectItem>
+                                <SelectItem value="date-asc">Donation Date (Soonest)</SelectItem>
+                                <SelectItem value="date-desc">Donation Date (Latest)</SelectItem>
+                                <SelectItem value="urgency">Urgent Requests</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
+                </div>
 
-                    {/* District Filter */}
-                    <div className="flex-1 min-w-37.5">
-                        <label className="text-sm font-medium mb-2 block">District</label>
-                        <Select value={district} onValueChange={handleDistrictChange}>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="All Districts" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">All Districts</SelectItem>
-                                {districtsData.map(d => (
-                                    <SelectItem key={d.district_name} value={d.district_name}>
-                                        {d.district_name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
+                <div className="border-t border-border/30 pt-4">
+                    <div className="flex flex-wrap gap-4 items-end">
+                        {/* Blood Group Filter */}
+                        <div className="flex-1 min-w-37.5">
+                            <label className="text-sm font-medium mb-2 block text-text-primary">Blood Group</label>
+                            <Select value={bloodGroup} onValueChange={setBloodGroup}>
+                                <SelectTrigger className="w-full bg-bg-default border border-border text-text-primary">
+                                    <SelectValue placeholder="All" />
+                                </SelectTrigger>
+                                <SelectContent className="bg-bg-default border border-border">
+                                    <SelectItem value="all">All</SelectItem>
+                                    {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map(bg => (
+                                        <SelectItem key={bg} value={bg}>{bg}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
 
-                    {/* Upazila Filter */}
-                    <div className="flex-1 min-w-37.5">
-                        <label className="text-sm font-medium mb-2 block">Upazila</label>
-                        <Select value={upazila} onValueChange={setUpazila} disabled={!district || district === "all"}>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder={district && district !== "all" ? "All Upazilas" : "Select district first"} />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">All Upazilas</SelectItem>
-                                {upazilas.map(u => (
-                                    <SelectItem key={u.id} value={u.name}>{u.name}</SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
+                        {/* District Filter */}
+                        <div className="flex-1 min-w-37.5">
+                            <label className="text-sm font-medium mb-2 block text-text-primary">District</label>
+                            <Select value={district} onValueChange={handleDistrictChange}>
+                                <SelectTrigger className="w-full bg-bg-default border border-border text-text-primary">
+                                    <SelectValue placeholder="All Districts" />
+                                </SelectTrigger>
+                                <SelectContent className="bg-bg-default border border-border">
+                                    <SelectItem value="all">All Districts</SelectItem>
+                                    {districtsData.map(d => (
+                                        <SelectItem key={d.district_name} value={d.district_name}>
+                                            {d.district_name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
 
-                    {/* Reset Button */}
-                    <div>
-                        <Button
-                            variant="outline"
-                            onClick={handleReset}
-                            disabled={!bloodGroup && !district && !upazila}
-                        >
-                            Reset Filters
-                        </Button>
+                        {/* Upazila Filter */}
+                        <div className="flex-1 min-w-37.5">
+                            <label className="text-sm font-medium mb-2 block text-text-primary">Upazila</label>
+                            <Select value={upazila} onValueChange={setUpazila} disabled={!district || district === "all"}>
+                                <SelectTrigger className="w-full bg-bg-default border border-border text-text-primary">
+                                    <SelectValue placeholder={district && district !== "all" ? "All Upazilas" : "Select district first"} />
+                                </SelectTrigger>
+                                <SelectContent className="bg-bg-default border border-border">
+                                    <SelectItem value="all">All Upazilas</SelectItem>
+                                    {upazilas.map(u => (
+                                        <SelectItem key={u.id} value={u.name}>{u.name}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        {/* Reset Button */}
+                        <div>
+                            <Button
+                                variant="outline"
+                                onClick={handleReset}
+                                disabled={!bloodGroup && !district && !upazila && !searchVal && !searchQuery && sortBy === "newest"}
+                                className="border border-border text-text-primary hover:bg-bg-card font-medium cursor-pointer"
+                            >
+                                Reset All
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </div>
