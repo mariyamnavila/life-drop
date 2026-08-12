@@ -46,7 +46,7 @@ const ContactUs = () => {
             Swal.fire({
                 icon: "success",
                 title: "Message Sent!",
-                text: "Your message has been sent successfully directly from the frontend!",
+                text: "Your message has been sent successfully!",
                 confirmButtonColor: "#c10100",
             });
             reset();
