@@ -185,7 +185,7 @@ const Profile = () => {
                     )}
                 </div>
                 <div className="flex-1 text-center md:text-left">
-                    <h1 className="text-xl font-bold text-text-primary break-words">
+                    <h1 className="text-xl font-bold text-text-primary wrap-break-word">
                         {formData.name || "Your Name"}
                     </h1>
                     <p className="text-sm text-text-muted flex items-center gap-1 justify-center md:justify-start mt-0.5 break-all">

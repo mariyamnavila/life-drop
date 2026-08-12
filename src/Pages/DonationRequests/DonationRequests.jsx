@@ -9,6 +9,7 @@ import useAxios from "@/hooks/useAxios";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import districtsData from "@/assets/bangladesh_districts.json";
 import { Helmet } from "react-helmet-async";
+import { Droplet, MapPin, Calendar, Clock } from "lucide-react";
 
 const DonationRequests = () => {
     const axiosInstance = useAxios();
@@ -161,45 +162,57 @@ const DonationRequests = () => {
                     {data?.donations?.map((donation) => (
                         <Card
                             key={donation._id}
-                            className="bg-red-50 dark:bg-red-950/30 border-red-100 dark:border-red-900/40 shadow-sm hover:shadow-md transition"
+                            className="bg-bg-default border border-border/40 shadow-xs hover:shadow-md transition duration-200 overflow-hidden flex flex-col h-full gap-3"
                         >
-                            <CardHeader className="flex flex-row items-center justify-between">
-                                <h3 className="font-semibold text-lg">
+                            {/* Card Banner/Header Graphic (No Gradient, clean flat background with a vector icon) */}
+                            <div className="h-24 bg-bg-card border-b border-border/30 flex items-center justify-center relative shrink-0">
+                                <div className="absolute top-2.5 left-2.5">
+                                    <Badge variant="destructive" className="bg-primary text-white font-semibold">
+                                        {donation.bloodGroup}
+                                    </Badge>
+                                </div>
+                                <div className="absolute top-2.5 right-2.5 text-xs font-semibold text-text-muted flex items-center gap-1.5 capitalize">
+                                    <span className={`inline-block w-2 h-2 rounded-full ${donation.donationStatus === 'pending' ? 'bg-amber-500' : 'bg-green-500'}`} />
+                                    {donation.donationStatus}
+                                </div>
+                                <Droplet className="h-10 w-10 text-primary animate-pulse" />
+                            </div>
+
+                            <CardHeader className="pb-0 gap-1">
+                                <h3 className="font-semibold text-lg text-text-primary">
                                     {donation.recipientName}
                                 </h3>
-                                <Badge variant="destructive">
-                                    {donation.bloodGroup}
-                                </Badge>
                             </CardHeader>
 
-                            <CardContent className="space-y-2 text-sm text-muted-foreground">
-                                <p>
-                                    <span className="font-medium text-foreground">
-                                        Location:
-                                    </span>{" "}
-                                    {donation.hospitalName}, {donation.recipientDistrict}
+                            <CardContent className="space-y-3 text-sm text-text-muted flex-1">
+                                <p className="line-clamp-2 italic text-xs mb-3 border-l-2 border-primary/40 pl-2 text-text-muted">
+                                    "{donation.requestMessage || 'No specific notes provided by requester.'}"
                                 </p>
-                                <p>
-                                    <span className="font-medium text-foreground">
-                                        Date:
-                                    </span>{" "}
-                                    {new Date(donation.donationDate).toLocaleDateString('en-GB', {
-                                        day: '2-digit',
-                                        month: 'long',
-                                        year: 'numeric',
-                                    })}
-                                </p>
-                                <p>
-                                    <span className="font-medium text-foreground">
-                                        Time:
-                                    </span>{" "}
-                                    {donation.donationTime}
-                                </p>
+                                <div className="space-y-2">
+                                    <p className="flex items-center gap-2">
+                                        <MapPin className="h-4 w-4 text-primary shrink-0" />
+                                        <span className="truncate">{donation.hospitalName}, {donation.recipientDistrict}</span>
+                                    </p>
+                                    <p className="flex items-center gap-2">
+                                        <Calendar className="h-4 w-4 text-primary shrink-0" />
+                                        <span>
+                                            {new Date(donation.donationDate).toLocaleDateString('en-GB', {
+                                                day: '2-digit',
+                                                month: 'long',
+                                                year: 'numeric',
+                                            })}
+                                        </span>
+                                    </p>
+                                    <p className="flex items-center gap-2">
+                                        <Clock className="h-4 w-4 text-primary shrink-0" />
+                                        <span>{donation.donationTime}</span>
+                                    </p>
+                                </div>
                             </CardContent>
 
-                            <CardFooter>
+                            <CardFooter className="pt-2">
                                 <Button
-                                    className="w-full"
+                                    className="w-full bg-primary hover:bg-primary-hover text-white transition-colors"
                                     onClick={() =>
                                         navigate(`/donations/${donation._id}`)
                                     }
