@@ -12,13 +12,11 @@ const DashboardHome = () => {
         return <Loading></Loading>
     }
 
-    if (role === 'donor') {
-        return <DonorDashboard />
-    } else if (role === 'admin' || role === 'volunteer') {
+    if (role === 'admin' || role === 'volunteer') {
         return <AdminOrVolunteerDashboard />
-    } else {
-        return <Unauthorized />
     }
+
+    return <DonorDashboard />
 };
 
 export default DashboardHome;

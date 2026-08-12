@@ -64,15 +64,15 @@ const SearchPage = () => {
     const getStatusColor = (status) => {
         switch (status?.toLowerCase()) {
             case "pending":
-                return "bg-yellow-100 text-yellow-800 border-yellow-300";
+                return "bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-400 border-yellow-300 dark:border-yellow-800";
             case "inprogress":
-                return "bg-blue-100 text-blue-800 border-blue-300";
+                return "bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-400 border-blue-300 dark:border-blue-800";
             case "done":
-                return "bg-green-100 text-green-800 border-green-300";
+                return "bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-400 border-green-300 dark:border-green-800";
             case "cancelled":
-                return "bg-red-100 text-red-800 border-red-300";
+                return "bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-400 border-red-300 dark:border-red-800";
             default:
-                return "bg-gray-100 text-gray-800 border-gray-300";
+                return "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600";
         }
     };
 

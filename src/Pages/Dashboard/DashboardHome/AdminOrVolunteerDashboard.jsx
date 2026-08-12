@@ -61,27 +61,27 @@ const AdminOrVolunteerDashboard = () => {
             {/* Statistics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Total Users */}
-                <Card className="flex flex-col items-center justify-center p-6 bg-blue-50 border-blue-100">
+                <Card className="flex flex-col items-center justify-center p-6 bg-blue-50 dark:bg-blue-900/20 border-blue-100 dark:border-blue-800">
                     <CardHeader className="flex flex-col items-center">
-                        <Users className="h-10 w-10 text-blue-600 mb-2" />
+                        <Users className="h-10 w-10 text-blue-600 dark:text-blue-400 mb-2" />
                         <h2 className="text-3xl font-bold">{data.totalUsers}</h2>
                         <p className="text-muted-foreground mt-1 text-center">Total Users</p>
                     </CardHeader>
                 </Card>
 
                 {/* Total Funding */}
-                <Card className="flex flex-col items-center justify-center p-6 bg-green-50 border-green-100">
+                <Card className="flex flex-col items-center justify-center p-6 bg-green-50 dark:bg-green-900/20 border-green-100 dark:border-green-800">
                     <CardHeader className="flex flex-col items-center">
-                        <DollarSign className="h-10 w-10 text-green-600 mb-2" />
+                        <DollarSign className="h-10 w-10 text-green-600 dark:text-green-400 mb-2" />
                         <h2 className="text-3xl font-bold">${data.totalFunds}</h2>
                         <p className="text-muted-foreground mt-1 text-center">Total Funding</p>
                     </CardHeader>
                 </Card>
 
                 {/* Total Blood Donations */}
-                <Card className="flex flex-col items-center justify-center p-6 bg-red-50 border-red-100">
+                <Card className="flex flex-col items-center justify-center p-6 bg-red-50 dark:bg-red-900/20 border-red-100 dark:border-red-800">
                     <CardHeader className="flex flex-col items-center">
-                        <Droplet className="h-10 w-10 text-red-600 mb-2" />
+                        <Droplet className="h-10 w-10 text-red-600 dark:text-red-400 mb-2" />
                         <h2 className="text-3xl font-bold">{data.totalDonations}</h2>
                         <p className="text-muted-foreground mt-1 text-center">Total Blood Requests</p>
                     </CardHeader>

@@ -45,7 +45,7 @@ const Footer = () => {
                         <input
                             type="email"
                             placeholder="Enter Your Email"
-                            className="px-3 py-2 rounded-md flex-1 text-black dark:text-gray-900 bg-white/90 focus:outline-none focus:ring-2 focus:ring-white transition"
+                            className="px-3 py-2 rounded-md flex-1 text-gray-900 dark:text-gray-100 bg-white/90 focus:outline-none focus:ring-2 focus:ring-white transition"
                         />
                         <button
                             type="submit"

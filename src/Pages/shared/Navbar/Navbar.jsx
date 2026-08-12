@@ -6,11 +6,16 @@ import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [profileMenuOpen, setProfileMenuOpen] = useState(false);
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
@@ -135,36 +140,71 @@ const Navbar = () => {
                                 Login
                             </Link>
                         ) : (
-                            <div className="relative">
-                                <img
-                                    src={user.photoURL || avatar}
-                                    alt="User Avatar"
-                                    className="w-10 h-10 rounded-full cursor-pointer border border-border object-cover"
-                                    onClick={() => setProfileMenuOpen(!profileMenuOpen)}
-                                />
-                                {profileMenuOpen && (
-                                    <div className="absolute right-0 mt-2 w-40 bg-bg-default border border-border shadow-lg rounded-md p-4 flex flex-col gap-2 transition-all">
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <img
+                                        src={user.photoURL || avatar}
+                                        alt="User Avatar"
+                                        className="w-10 h-10 rounded-full cursor-pointer border border-border object-cover focus:outline-hidden"
+                                    />
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end" className="w-56 bg-bg-default border border-border shadow-lg p-3 flex flex-col gap-1 z-50">
+                                    <div className="flex items-center gap-3 px-2 py-2 mb-1 border-b border-border">
+                                        <img
+                                            src={user.photoURL || avatar}
+                                            alt="User Avatar"
+                                            className="w-9 h-9 rounded-full border border-border object-cover"
+                                        />
+                                        <div className="flex flex-col min-w-0">
+                                            <span className="text-sm font-semibold text-text-primary truncate">
+                                                {user.displayName || 'User'}
+                                            </span>
+                                            <span className="text-xs text-text-muted truncate">
+                                                {user.email}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <DropdownMenuItem asChild>
                                         <NavLink
                                             to="/dashboard"
-                                            className="text-text-primary hover:text-primary transition-colors"
-                                            onClick={() => setProfileMenuOpen(false)}
+                                            className="flex items-center gap-2 px-2 py-2 rounded-md text-sm text-text-primary hover:bg-bg-card hover:text-primary transition-colors cursor-pointer w-full text-left"
                                         >
                                             Dashboard
                                         </NavLink>
-                                        <p
-                                            className="text-text-primary hover:text-primary cursor-pointer transition-colors"
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
+                                        <button
+                                            type="button"
+                                            className="flex items-center gap-2 px-2 py-2 rounded-md text-sm text-text-primary hover:bg-bg-card hover:text-primary transition-colors text-left w-full cursor-pointer"
                                             onClick={handleLogOut}
                                         >
                                             Logout
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
+                                        </button>
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         )}
                     </div>
                 </div>
                 {mobileMenuOpen && (
                     <div className="md:hidden bg-bg-default border border-border shadow-md p-4 flex flex-col gap-2 mt-2 transition-all">
+                        {user && (
+                            <div className="flex items-center gap-3 px-3 py-2 mb-2">
+                                <img
+                                    src={user.photoURL || avatar}
+                                    alt="User Avatar"
+                                    className="w-10 h-10 rounded-full border border-border object-cover"
+                                />
+                                <div className="flex flex-col min-w-0">
+                                    <span className="text-sm font-semibold text-text-primary truncate">
+                                        {user.displayName || 'User'}
+                                    </span>
+                                    <span className="text-xs text-text-muted truncate">
+                                        {user.email}
+                                    </span>
+                                </div>
+                            </div>
+                        )}
                         {links.map((link) => {
                             return (
                                 <NavLink
@@ -182,6 +222,15 @@ const Navbar = () => {
                                 </NavLink>
                             );
                         })}
+                        {user && (
+                            <NavLink
+                                to="/dashboard"
+                                className="flex items-center gap-2 px-3 py-2 rounded-md font-medium transition-colors text-text-primary hover:bg-bg-card"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                Dashboard
+                            </NavLink>
+                        )}
                     </div>
                 )}
             </div>

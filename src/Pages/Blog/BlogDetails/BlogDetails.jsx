@@ -125,7 +125,7 @@ const BlogDetails = () => {
     };
 
     return (
-        <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-[#1a1d23] dark:to-[#1a1d23]">
+        <div className="min-h-screen">
             <Helmet>
                 <title>{`${data.title} | Life Drop`}</title>
                 <meta name="description" content={`Read article: ${data.title}`} />
@@ -199,18 +199,18 @@ const BlogDetails = () => {
                     <CardContent className="p-8 md:p-12">
                         <div
                             className="prose prose-lg max-w-none
-                                prose-headings:text-gray-900 
+                                prose-headings:text-gray-900 dark:prose-headings:text-gray-100
                                 prose-headings:font-bold
-                                prose-p:text-gray-700 
+                                prose-p:text-gray-700 dark:prose-p:text-gray-300
                                 prose-p:leading-relaxed
-                                prose-a:text-red-600 
+                                prose-a:text-red-600 dark:prose-a:text-red-400
                                 prose-a:no-underline
                                 hover:prose-a:underline
-                                prose-strong:text-gray-900
-                                prose-ul:text-gray-700
-                                prose-ol:text-gray-700
+                                prose-strong:text-gray-900 dark:prose-strong:text-gray-100
+                                prose-ul:text-gray-700 dark:prose-ul:text-gray-300
+                                prose-ol:text-gray-700 dark:prose-ol:text-gray-300
                                 prose-blockquote:border-red-500
-                                prose-blockquote:bg-red-50
+                                prose-blockquote:bg-red-50 dark:prose-blockquote:bg-red-900/20
                                 prose-blockquote:px-6
                                 prose-blockquote:py-4
                                 prose-blockquote:rounded-r-lg
@@ -293,7 +293,7 @@ const BlogDetails = () => {
 
                 {/* Author Card (Optional) */}
                 {data.author && (
-                    <Card className="mt-8 bg-linear-to-r from-gray-50 to-white dark:from-[#22262e] dark:to-[#22262e] border-2 dark:border-[#33383f]">
+                    <Card className="mt-8 bg-bg-card border-2 border-border">
                         <CardContent className="p-8">
                             <div className="flex items-start gap-6">
                                 <div className="bg-linear-to-br from-red-500 to-pink-500 rounded-full p-4 shrink-0">

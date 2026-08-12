@@ -62,11 +62,11 @@ const SearchDonor = () => {
     const getStatusColor = (status) => {
         switch (status?.toLowerCase()) {
             case "active":
-                return "bg-green-100 text-green-800 border-green-300";
+                return "bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-400 border-green-300 dark:border-green-800";
             case "inactive":
-                return "bg-gray-100 text-gray-800 border-gray-300";
+                return "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600";
             default:
-                return "bg-gray-100 text-gray-800 border-gray-300";
+                return "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600";
         }
     };
 
@@ -87,8 +87,8 @@ const SearchDonor = () => {
             </Helmet>
             {/* Header */}
             <div className="mt-6">
-                <h1 className="text-3xl font-bold text-gray-900">Search Blood Donors</h1>
-                <p className="text-gray-600 mt-1">Find registered blood donors by blood group and location</p>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Search Blood Donors</h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">Find registered blood donors by blood group and location</p>
             </div>
 
             {/* Search Filters Card */}
@@ -189,9 +189,9 @@ const SearchDonor = () => {
             {!isLoading && searchParams && results.length === 0 && (
                 <Card>
                     <CardContent className="p-12 text-center">
-                        <Droplet className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">No Donors Found</h3>
-                        <p className="text-gray-600">
+                        <Droplet className="h-12 w-12 mx-auto text-gray-400 dark:text-gray-500 mb-4" />
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">No Donors Found</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
                             No donors match your search criteria. Try adjusting your filters.
                         </p>
                     </CardContent>
@@ -202,8 +202,8 @@ const SearchDonor = () => {
             {!isLoading && !searchParams && (
                 <Card className={'mb-10'}>
                     <CardContent className="p-12 text-center">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">Ready to Search</h3>
-                        <p className="text-gray-600">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Ready to Search</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
                             Select your search criteria above and click "Search" to find donors.
                         </p>
                     </CardContent>
@@ -214,7 +214,7 @@ const SearchDonor = () => {
             {!isLoading && results.length > 0 && (
                 <>
                     <div className="flex justify-between items-center">
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
                             Found {results.length} {results.length === 1 ? 'Donor' : 'Donors'}
                         </h2>
                     </div>
@@ -225,7 +225,7 @@ const SearchDonor = () => {
                                 <CardHeader>
                                     <div className="flex justify-between items-start">
                                         <div className="flex items-center gap-3">
-                                            <div className="h-14 w-14 rounded-full overflow-hidden bg-gray-200">
+                                            <div className="h-14 w-14 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
                                                 {donor.image ? (
                                                     <img 
                                                         src={donor.image} 
@@ -233,8 +233,8 @@ const SearchDonor = () => {
                                                         className="h-full w-full object-cover"
                                                     />
                                                 ) : (
-                                                    <div className="h-full w-full flex items-center justify-center bg-blue-100">
-                                                        <User className="h-6 w-6 text-blue-600" />
+                                                    <div className="h-full w-full flex items-center justify-center bg-blue-100 dark:bg-blue-900/40">
+                                                        <User className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                                                     </div>
                                                 )}
                                             </div>
@@ -255,33 +255,33 @@ const SearchDonor = () => {
                                 </CardHeader>
                                 <CardContent className="space-y-3">
                                     <div className="flex items-start gap-2 text-sm">
-                                        <MapPin className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
+                                        <MapPin className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5 shrink-0" />
                                         <div>
-                                            <p className="text-gray-900">
+                                            <p className="text-gray-900 dark:text-gray-100">
                                                 {donor.upazila}, {donor.district}
                                             </p>
-                                            <p className="text-gray-600 text-xs">Location</p>
+                                            <p className="text-gray-600 dark:text-gray-400 text-xs">Location</p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start gap-2 text-sm">
-                                        <Mail className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
+                                        <Mail className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5 shrink-0" />
                                         <div>
-                                            <p className="text-gray-900 break-all">
+                                            <p className="text-gray-900 dark:text-gray-100 break-all">
                                                 {donor.email}
                                             </p>
-                                            <p className="text-gray-600 text-xs">Email</p>
+                                            <p className="text-gray-600 dark:text-gray-400 text-xs">Email</p>
                                         </div>
                                     </div>
 
                                     {donor.created_at && (
                                         <div className="flex items-start gap-2 text-sm">
-                                            <Calendar className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
+                                            <Calendar className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5 shrink-0" />
                                             <div>
-                                                <p className="text-gray-900">
+                                                <p className="text-gray-900 dark:text-gray-100">
                                                     {formatDate(donor.created_at)}
                                                 </p>
-                                                <p className="text-gray-600 text-xs">Registered on</p>
+                                                <p className="text-gray-600 dark:text-gray-400 text-xs">Registered on</p>
                                             </div>
                                         </div>
                                     )}

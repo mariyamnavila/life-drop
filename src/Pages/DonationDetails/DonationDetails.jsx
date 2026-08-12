@@ -95,31 +95,31 @@ const DonationDetails = () => {
         switch (status?.toLowerCase()) {
             case "pending":
                 return {
-                    color: "bg-yellow-100 text-yellow-800 border-yellow-300",
+                    color: "bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-400 border-yellow-300 dark:border-yellow-800",
                     icon: AlertCircle,
                     text: "Pending"
                 };
             case "inprogress":
                 return {
-                    color: "bg-blue-100 text-blue-800 border-blue-300",
+                    color: "bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-400 border-blue-300 dark:border-blue-800",
                     icon: CheckCircle2,
                     text: "In Progress"
                 };
             case "done":
                 return {
-                    color: "bg-green-100 text-green-800 border-green-300",
+                    color: "bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-400 border-green-300 dark:border-green-800",
                     icon: CheckCircle2,
                     text: "Completed"
                 };
             case "cancelled":
                 return {
-                    color: "bg-red-100 text-red-800 border-red-300",
+                    color: "bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-400 border-red-300 dark:border-red-800",
                     icon: AlertCircle,
                     text: "Cancelled"
                 };
             default:
                 return {
-                    color: "bg-gray-100 text-gray-800 border-gray-300",
+                    color: "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600",
                     icon: AlertCircle,
                     text: status
                 };

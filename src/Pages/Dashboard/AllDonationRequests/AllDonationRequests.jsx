@@ -141,7 +141,7 @@ const AllDonationRequests = () => {
                     }}
                 >
                     <SelectTrigger className="w-34">
-                        <SelectValue placeholder="Status" className="text-center text-black truncate" />
+                        <SelectValue placeholder="Status" className="text-center truncate" />
                     </SelectTrigger>
                     <SelectContent >
                         <SelectItem value="all">All</SelectItem>
@@ -280,7 +280,7 @@ const AllDonationRequests = () => {
                             }}
                         >
                             <SelectTrigger className="w-24">
-                                <SelectValue placeholder="Rows" className="text-center text-black truncate" />
+                                <SelectValue placeholder="Rows" className="text-center truncate" />
                             </SelectTrigger>
                             <SelectContent >
                                 <SelectItem value="5">5</SelectItem>
