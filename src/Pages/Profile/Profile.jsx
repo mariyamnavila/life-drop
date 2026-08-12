@@ -36,7 +36,7 @@ const Profile = () => {
         enabled: !!user?.email && !authLoading,
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/${user.email}`);
-            const data = res.data;
+            const data = res.data.data;
             setFormData({
                 name: data.name || "",
                 district: data.district || "",

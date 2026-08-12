@@ -40,7 +40,7 @@ const PaymentForm = ({ amount, onSuccess, onCancel }) => {
             const res = await axiosSecure.post("/fundings/create-payment-intent", {
                 amount,
             });
-            const clientSecret = res.data.clientSecret;
+            const clientSecret = res.data.data.clientSecret;
 
             // 3️⃣ Confirm card payment
             const result = await stripe.confirmCardPayment(clientSecret, {

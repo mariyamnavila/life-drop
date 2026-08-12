@@ -35,7 +35,10 @@ const ContentManagement = () => {
             if (status !== "all") query.append("status", status);
 
             const res = await axiosSecure.get(`/blogs?${query.toString()}`);
-            return res.data;
+            return {
+                blogs: res.data.data,
+                totalCount: res.data.meta.total
+            };
         },
         keepPreviousData: true,
     });

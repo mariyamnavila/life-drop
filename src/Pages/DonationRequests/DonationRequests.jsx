@@ -47,7 +47,10 @@ const DonationRequests = () => {
             const res = await axiosInstance.get(
                 `/donations/pending?${params.toString()}`
             );
-            return res.data;
+            return {
+                donations: res.data.data,
+                totalCount: res.data.meta.total
+            };
         },
         keepPreviousData: true,
     });

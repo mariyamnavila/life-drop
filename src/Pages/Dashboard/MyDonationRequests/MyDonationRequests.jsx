@@ -37,7 +37,10 @@ const MyDonationRequests = () => {
             }
 
             const res = await axiosSecure.get(`/donations?${query.toString()}`);
-            return res.data;
+            return {
+                donations: res.data.data,
+                totalCount: res.data.meta.total
+            };
         },
         keepPreviousData: true,
     });

@@ -17,7 +17,7 @@ const useUserRole = () => {
         queryFn: async () => {
             // if (!user?.email) throw new Error("No user email");
             const res = await axiosSecure.get(`/users/${user.email}/role`);
-            return res.data;
+            return res.data.data;
         },
         enabled: !!user?.email && !authLoading, // only run when user email exists
         staleTime: 5 * 60 * 1000, // 5 mins

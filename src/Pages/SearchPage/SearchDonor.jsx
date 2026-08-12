@@ -42,7 +42,7 @@ const SearchDonor = () => {
             if (searchParams.upazila) params.append("upazila", searchParams.upazila);
 
             const response = await axiosInstance.get(`/users/search?${params.toString()}`);
-            return response.data;
+            return response.data.data;
         },
         enabled: searchParams !== null,
         staleTime: 30000, // 30 seconds

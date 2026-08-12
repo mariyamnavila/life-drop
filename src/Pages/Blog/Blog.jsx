@@ -19,7 +19,10 @@ const Blog = () => {
         queryKey: ["published-blogs", page, limit],
         queryFn: async () => {
             const res = await axiosInstance.get(`/blogs/published?page=${page}&limit=${limit}`);
-            return res.data;
+            return {
+                blogs: res.data.data,
+                totalCount: res.data.meta.total
+            };
         },
         keepPreviousData: true,
     });

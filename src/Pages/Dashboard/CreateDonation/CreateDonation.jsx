@@ -103,7 +103,7 @@ const CreateDonation = () => {
         try {
             const res = await axiosSecure.post("/donations", donationRequest);
 
-            if (res.data.insertedId) {
+            if (res.data.data.insertedId) {
                 setDialogTitle("Success!");
                 setDialogMessage("Donation request created successfully.");
                 setDialogOpen(true);

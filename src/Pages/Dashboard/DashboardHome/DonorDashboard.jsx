@@ -31,7 +31,7 @@ const DonorDashboard = () => {
             const res = await axiosSecure.get(
                 `/donations?email=${user.email}&limit=3`
             );
-            return res.data.donations;
+            return res.data.data;
         },
     });
 

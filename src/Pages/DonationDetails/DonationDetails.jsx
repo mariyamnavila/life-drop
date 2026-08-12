@@ -57,7 +57,7 @@ const DonationDetails = () => {
         enabled: !!donationId,
         queryFn: async () => {
             const res = await axiosSecure.get(`/donations/${donationId}`);
-            return res.data;
+            return res.data.data;
         },
     });
 

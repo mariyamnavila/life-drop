@@ -39,7 +39,10 @@ const AllUsers = () => {
             const res = await axiosSecure.get(
                 `/users?${query.toString()}`
             );
-            return res.data;
+            return {
+                users: res.data.data,
+                totalCount: res.data.meta.total
+            };
         },
         keepPreviousData: true,
     });

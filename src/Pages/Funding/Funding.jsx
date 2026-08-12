@@ -33,7 +33,10 @@ const FundingPage = () => {
         queryFn: async () => {
             const query = new URLSearchParams({ page, limit });
             const res = await axiosSecure.get(`/fundings?${query.toString()}`);
-            return res.data;
+            return {
+                fundings: res.data.data,
+                totalCount: res.data.meta.total
+            };
         },
         keepPreviousData: true,
     });

@@ -16,7 +16,7 @@ const AdminOrVolunteerDashboard = () => {
         queryKey: ["admin-stats"],
         queryFn: async () => {
             const res = await axiosSecure.get("/admin/dashboard-stats");
-            return res.data;
+            return res.data.data;
         },
     });
 
